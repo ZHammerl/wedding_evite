@@ -1,19 +1,20 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import "./App.scss";
 import Navbar from "./features/navbar/navbar";
+import Hero from "./features/hero/Hero";
+import Rsvp from "./features/RSVP/Rsvp";
+import Contact from "./features/contact/Contact";
+import Extras from "./features/extras/Extras";
+import Details from "./features/details/Details";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
       <Navbar />
       <Hero />
       <Details />
-      <Extra />
+      <Extras />
       <Contact />
-      <RSVP />
+      <Rsvp />
     </div>
   );
 }
