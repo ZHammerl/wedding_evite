@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+//colors
+$primaryColor: #60737a;
+$secondaryColor: #9f7844;
