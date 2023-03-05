@@ -17,7 +17,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { RsvpButton } from "../../components/rsvpButton";
 import { Helpers } from "../../helpers/helpers";
 
-const drawerWidth = 240;
 const navItems = ["Inicio", "Detalles", "Extras", "Contacto", "RSVP"];
 
 export default function Navbar() {
