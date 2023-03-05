@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "@mui/system";
 import { Box, Stack, Typography } from "@mui/material";
 import { CardMedia } from "@mui/material";
+import heroImage from "../../assets/img/hero_img.jpg";
 
 function Hero({}) {
   const data = {
@@ -11,8 +12,7 @@ function Hero({}) {
     location: "Querétaro",
   };
 
-  const image =
-    "https://images.unsplash.com/photo-1620862657912-57090d3f03e8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80";
+  const image = heroImage
 
   return (
     <Box>
