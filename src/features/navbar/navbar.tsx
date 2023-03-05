@@ -11,11 +11,10 @@ import {
   Toolbar,
   Typography,
   Button,
+  Box,
 } from "@mui/material";
-import Box from "@mui/material/Box";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const drawerWidth = 240;
 const navItems = ["Inicio", "Detalles", "Extras", "Contacto", "RSVP"];
 
 export default function Navbar() {
