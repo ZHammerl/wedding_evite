@@ -14,6 +14,8 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import MenuIcon from "@mui/icons-material/Menu";
+import { RsvpButton } from "../../components/rsvpButton";
+import { Helpers } from "../../helpers/helpers";
 
 const drawerWidth = 240;
 const navItems = ["Inicio", "Detalles", "Extras", "Contacto", "RSVP"];
@@ -26,23 +28,20 @@ export default function Navbar() {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+  const names = { nameOne: "Blanca", nameTwo: "Pam" };
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        LOGO
+        {Helpers.getInitials(["blanca", "Pam"])}
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) =>
           item === "RSVP" ? (
-            <Button
-              key={item}
-              sx={{ backgroundColor: "red" }}
-              onClick={() => handleClick(item)}
-            >
+            <RsvpButton key={item} onClick={() => handleClick(item)}>
               {item}
-            </Button>
+            </RsvpButton>
           ) : (
             <ListItem key={item} disablePadding>
               <ListItemButton sx={{ textAlign: "center" }}>
@@ -63,33 +62,39 @@ export default function Navbar() {
         sx={{ backgroundColor: "#F0A04B" }}
       >
         <Toolbar>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: "block", sm: "none" } }}
+          >
+            {Helpers.getInitials(["blanca", "Pam"])}
+          </Typography>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{
+              mr: 2,
+              display: { sm: "none" },
+            }}
           >
             <MenuIcon />
           </IconButton>
+
           <Typography
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            LOGO
+            {names.nameOne}&{names.nameTwo}
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) =>
               item === "RSVP" ? (
-                <Button
-                  variant="contained"
-                  key={item}
-                  sx={{ backgroundColor: "#E1EEDD", color: "black" }}
-                  onClick={() => handleClick(item)}
-                >
+                <RsvpButton key={item} onClick={() => handleClick(item)}>
                   {item}
-                </Button>
+                </RsvpButton>
               ) : (
                 <Button
                   key={item}
