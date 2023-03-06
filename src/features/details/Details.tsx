@@ -18,9 +18,9 @@ import {
   Card,
   Link,
 } from "@mui/material";
-import LocationOne from "../../assets/img/locations/gettyimages-157610088-612x612.jpg";
-import LocationTwo from "../../assets/img/locations/gettyimages-170024886-612x612.jpg";
-import { LocationObject } from "../../interfaces/interfaces";
+import LocationOne from "@assets/img/locations/gettyimages-157610088-612x612.jpg";
+import LocationTwo from "@assets/img/locations/gettyimages-170024886-612x612.jpg";
+import { LocationObject } from "@interfaces/interfaces";
 import "./details.scss";
 import * as styles from "./details.styles";
 
