@@ -56,31 +56,37 @@ function Details() {
     <Box
       component="div"
       sx={{
-        backgroundColor: "red",
+        backgroundColor: "#EDDBC7",
         padding: "2em",
-        display: "flex",
-        justifyContent: "center",
       }}
     >
       <Container
         disableGutters
-        sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: 4,
+        }}
       >
         {locations.map((location) => (
-          <Card
-            key={location.id}
-            sx={{ maxWidth: 330, maxHeight: 480, margin: 2 }}
-          >
+          <Card key={location.id} sx={{ maxWidth: 330, py: 2 }}>
             <Stack spacing={2}>
-              <Typography variant="h4" align="center">
-                {location.title}
-              </Typography>
-              <CardMedia
-                image={location.image}
-                component="img"
-                sx={{ height: "200px" }}
-              />
-              <Box sx={{ px: 2 }}>
+              <Container sx={{ flexDirection: "row" }}>
+                <Typography variant="h4" align="center">
+                  {location.title}
+                </Typography>
+              </Container>
+              <Box sx={{ border: "solid 1px black" }}>
+                <CardMedia
+                  image={location.image}
+                  component="img"
+                  sx={{ height: "200px" }}
+                />
+                <Typography variant="h5">{location.time}</Typography>
+              </Box>
+
+              <Container>
                 <Typography variant="h5">{location.name}</Typography>
                 <Typography variant="h5">{location.date}</Typography>
                 <Link
@@ -93,7 +99,7 @@ function Details() {
                 >
                   {location.address}
                 </Link>
-              </Box>
+              </Container>
             </Stack>
           </Card>
         ))}
