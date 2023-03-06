@@ -18,17 +18,19 @@ import {
   Card,
   Link,
 } from "@mui/material";
-import LocationOne from "../../assets/locations/gettyimages-157610088-612x612.jpg";
-import LocationTwo from "../../assets/locations/gettyimages-170024886-612x612.jpg";
+import LocationOne from "../../assets/img/locations/gettyimages-157610088-612x612.jpg";
+import LocationTwo from "../../assets/img/locations/gettyimages-170024886-612x612.jpg";
+import { LocationObject } from "../../interfaces/interfaces";
 
 function Details() {
-  const locations = [
+  const locations: LocationObject[] = [
     {
       id: "1",
       title: "Ceremonia Religiosa",
       image: LocationOne,
       name: "Parroquia x",
-      date: "12 de enero 14:00",
+      date: "12 de enero ",
+      time: "14:00",
       address: "calle 50 Centro Barrio, Mexico",
     },
     {
@@ -36,7 +38,17 @@ function Details() {
       title: "Fiesta",
       image: LocationTwo,
       name: "Salon x",
-      date: "12 de enero 18:00",
+      date: "12 de enero",
+      time: "18:00",
+      address: "calle 15 Centro Barrio, Mexico",
+    },
+    {
+      id: "3",
+      title: "After Party",
+      image: LocationTwo,
+      name: "Salon Y",
+      date: "12 de enero",
+      time: "22:00",
       address: "calle 15 Centro Barrio, Mexico",
     },
   ];
@@ -46,12 +58,19 @@ function Details() {
       sx={{
         backgroundColor: "red",
         padding: "2em",
-        height: "700px",
+        display: "flex",
+        justifyContent: "center",
       }}
     >
-      <Stack direction={{ xs: "column", sm: "row" }} spacing={3}>
+      <Container
+        disableGutters
+        sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+      >
         {locations.map((location) => (
-          <Card key={location.id} sx={{ maxWidth: 250 }}>
+          <Card
+            key={location.id}
+            sx={{ maxWidth: 330, maxHeight: 480, margin: 2 }}
+          >
             <Stack spacing={2}>
               <Typography variant="h4" align="center">
                 {location.title}
@@ -78,7 +97,7 @@ function Details() {
             </Stack>
           </Card>
         ))}
-      </Stack>
+      </Container>
     </Box>
   );
 }

@@ -15,3 +15,12 @@ export interface ContactObject {
   contactOne: string[];
   contactTwo?: string[];
 }
+export interface LocationObject {
+  id: string;
+  title: string;
+  image: string;
+  name: string;
+  date: string;
+  time: string;
+  address: string;
+}
