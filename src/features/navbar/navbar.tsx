@@ -27,12 +27,12 @@ export default function Navbar() {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
-  const names = { nameOne: "Blanca", nameTwo: "Pam" };
+  const bridalCouple = { nameOne: "Blanca", nameTwo: "Pam" };
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        {Helpers.getInitials(["blanca", "Pam"])}
+        {Helpers.getInitials([bridalCouple.nameOne, bridalCouple.nameTwo])}
       </Typography>
       <Divider />
       <List>
@@ -66,7 +66,7 @@ export default function Navbar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "block", sm: "none" } }}
           >
-            {Helpers.getInitials(["blanca", "Pam"])}
+            {Helpers.getInitials([bridalCouple.nameOne, bridalCouple.nameTwo])}
           </Typography>
           <IconButton
             color="inherit"
@@ -86,7 +86,7 @@ export default function Navbar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            {names.nameOne}&{names.nameTwo}
+            {bridalCouple.nameOne}&{bridalCouple.nameTwo}
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) =>
