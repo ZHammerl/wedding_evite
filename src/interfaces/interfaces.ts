@@ -24,3 +24,11 @@ export interface LocationObject {
   time: string;
   address: string;
 }
+
+export interface WeddingHelper {
+  id: number;
+  title?: string;
+  inChargeOf?: string;
+  name: string;
+  phone: string;
+}
