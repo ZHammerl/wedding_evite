@@ -4,7 +4,7 @@ import Rsvp from "./features/RSVP/Rsvp";
 import Contact from "./features/contact/Contact";
 import Extras from "./features/extras/Extras";
 import Details from "./features/details/Details";
-import Navbar from "./features/navbar/Navbar";
+import Navbar from "@navbar/Navbar";
 
 function App() {
   return (
