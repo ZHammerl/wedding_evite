@@ -57,7 +57,7 @@ export default function Navbar() {
     <Box sx={{ display: "flex" }}>
       <AppBar
         component="nav"
-        position="sticky"
+        position="fixed"
         sx={{ backgroundColor: "#F0A04B" }}
       >
         <Toolbar>
