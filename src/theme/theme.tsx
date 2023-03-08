@@ -14,7 +14,7 @@ export enum themePalette {
 
 const theme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
     background: {
       default: themePalette.BG,
     },
