@@ -24,6 +24,9 @@
       "@components/*": ["src/components/*"],
       "@interfaces/*": ["src/interfaces/*"],
       "@assets/*": ["src/assets/*"],
+      "@adminContacts/*": ["src/features/adminContacts/*"],
+      "@guestList/*": ["src/features/guestList/*"],
+      "@footer/*": ["src/features/footer/*"],
       //the last paths for root otherwise will ignore other paths
       "@root/*": ["src/*"]
     }
