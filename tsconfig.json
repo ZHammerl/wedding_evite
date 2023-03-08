@@ -14,7 +14,19 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@navbar/*": ["src/features/navbar/*"],
+      "@details/*": ["src/features/details/*"],
+      "@hero/*": ["src/features/hero/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "@components/*": ["src/components/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@assets/*": ["src/assets/*"],
+      //the last paths for root otherwise will ignore other paths
+      "@root/*": ["src/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

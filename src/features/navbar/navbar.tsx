@@ -11,11 +11,11 @@ import {
   Toolbar,
   Typography,
   Button,
+  Box,
 } from "@mui/material";
-import Box from "@mui/material/Box";
 import MenuIcon from "@mui/icons-material/Menu";
-import { RsvpButton } from "../../components/rsvpButton";
-import { Helpers } from "../../helpers/helpers";
+import { RsvpButton } from "@components/rsvpButton";
+import { Helpers } from "@helpers/helpers";
 
 const navItems = ["Inicio", "Detalles", "Extras", "Contacto", "RSVP"];
 
