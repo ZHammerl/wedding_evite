@@ -43,9 +43,9 @@ function Contact() {
       <Typography variant="h4" align="center">
         ¿Tienes preguntas?
       </Typography>
-      <Container sx={styles.helpersContainer}>
+      <Container maxWidth="lg" sx={styles.helpersContainer}>
         {weddingHelpers.map((helper) => (
-          <Container key={helper.id} sx={styles.helperContainer}>
+          <Container key={helper.id} maxWidth="xs" sx={styles.helperContainer}>
             <Typography>{helper?.title}</Typography>
             <Typography>{helper.name}</Typography>
             {helper.inChargeOf && <Typography>Contactame para:</Typography>}
