@@ -20,6 +20,7 @@
       "@navbar/*": ["src/features/navbar/*"],
       "@details/*": ["src/features/details/*"],
       "@hero/*": ["src/features/hero/*"],
+      "@contact/*": ["src/features/contact/*"],
       "@helpers/*": ["src/helpers/*"],
       "@components/*": ["src/components/*"],
       "@interfaces/*": ["src/interfaces/*"],
