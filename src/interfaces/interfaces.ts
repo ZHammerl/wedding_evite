@@ -15,3 +15,15 @@ export interface ContactObject {
   contactOne: string[];
   contactTwo?: string[];
 }
+
+export interface GuestItem {
+  id: number | string;
+  name: string;
+  surname: string;
+}
+
+export interface GuestItems extends Array<GuestItem> {}
+
+export interface RadioButtonProps{
+  data: { value: string }[];
+};

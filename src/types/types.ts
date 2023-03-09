@@ -11,3 +11,4 @@ export type Contact = {
   contactOne: string[];
   contactTwo?: string[];
 };
+
