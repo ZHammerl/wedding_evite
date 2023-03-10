@@ -20,10 +20,14 @@
       "@navbar/*": ["src/features/navbar/*"],
       "@details/*": ["src/features/details/*"],
       "@hero/*": ["src/features/hero/*"],
+      "@contact/*": ["src/features/contact/*"],
       "@helpers/*": ["src/helpers/*"],
       "@components/*": ["src/components/*"],
       "@interfaces/*": ["src/interfaces/*"],
       "@assets/*": ["src/assets/*"],
+      "@adminContacts/*": ["src/features/adminContacts/*"],
+      "@guestList/*": ["src/features/guestList/*"],
+      "@footer/*": ["src/features/footer/*"],
       //the last paths for root otherwise will ignore other paths
       "@root/*": ["src/*"]
     }

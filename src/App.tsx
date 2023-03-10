@@ -1,21 +1,13 @@
 import "./App.scss";
-import Hero from "./features/hero/Hero";
-import Rsvp from "./features/RSVP/Rsvp";
-import Contact from "./features/contact/Contact";
-import Extras from "./features/extras/Extras";
-import Details from "./features/details/Details";
-import Navbar from "@navbar/Navbar";
+
+import { BrowserRouter } from "react-router-dom";
+import { AppRouter } from "./Router";
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Hero />
-      <Details />
-      <Extras />
-      <Contact />
-      <Rsvp />
-    </div>
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
   );
 }
 
