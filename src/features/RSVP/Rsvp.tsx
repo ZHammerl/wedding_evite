@@ -22,7 +22,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import SendIcon from "@mui/icons-material/Send";
 import { v4 as uuid } from "uuid";
-import RadioButton from "../../components/radioButton";
+import OptionToggleButton from "../../components/optionToggleButton";
 
 import {
   GuestItem,
@@ -85,6 +85,7 @@ function Rsvp() {
                 display: "flex",
                 flexDirection: "column",
                 gap: 2,
+                width: 220,
               }}>
               <Typography variant="h6">
                 {guest.name}
@@ -93,10 +94,10 @@ function Rsvp() {
                 <Typography variant="body1" mb={1}>
                   Vienes a nuestra boda?
                 </Typography>
-                <RadioButton data={data} />
+                <OptionToggleButton data={data} />
               </Box>
               <FormControl sx={{ mt: 2 }}>
-                <FormLabel id="menue-selection">
+                <FormLabel id="menue-selection" >
                   Qué menue prefieres?
                 </FormLabel>
                 <RadioGroup
@@ -132,15 +133,16 @@ function Rsvp() {
                   display: "flex",
                   flexDirection: "column",
                   gap: 2,
+                  width: 220,
                 }}>
-                <FormControl sx={{ width: 170 }}>
+                <FormControl>
                   <TextField
                     id="name"
                     label="Nombre"
                     required
                     variant="standard"></TextField>
                 </FormControl>
-                <FormControl sx={{ width: 170 }}>
+                <FormControl>
                   <TextField
                     id="surname"
                     label="Apellido"
@@ -151,10 +153,7 @@ function Rsvp() {
                   <Typography variant="body1" mb={1}>
                     Vienes a nuestra boda?
                   </Typography>
-                  <ButtonGroup className="feedbackButton-wrapper">
-                    <Button className="feedback">Si</Button>
-                    <Button className="feedback">No</Button>
-                  </ButtonGroup>
+                  <OptionToggleButton data={data} />
                 </Box>{" "}
                 <FormControl sx={{ mt: 2 }}>
                   <FormLabel id="menue-selection">

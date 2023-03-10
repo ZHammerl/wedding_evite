@@ -12,6 +12,17 @@ export enum themePalette {
   FONT_GLOBAL = "", //tipografia
 }
 
+declare module '@mui/material/styles' {
+  
+  interface Palette {
+    yes: Palette['primary'];
+    no: Palette['primary'];
+  }
+  interface PaletteOptions {
+    yes: PaletteOptions['primary'];
+    no: PaletteOptions['primary'];
+  }}
+
 const theme = createTheme({
   palette: {
     mode: "light",
@@ -21,6 +32,12 @@ const theme = createTheme({
     primary: {
       main: themePalette.LIME,
     },
+    yes:{
+      main: "#388e3c"
+    }, 
+    no: {
+      main: "#d32f2f"
+    }
   },
   typography: {
     fontFamily: themePalette.FONT_GLOBAL,
