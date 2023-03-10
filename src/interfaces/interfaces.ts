@@ -27,3 +27,20 @@ export interface GuestItems extends Array<GuestItem> {}
 export interface RadioButtonProps{
   data: { value: string }[];
 };
+export interface LocationObject {
+  id: string;
+  title: string;
+  image: string;
+  name: string;
+  date: string;
+  time: string;
+  address: string;
+}
+
+export interface WeddingHelper {
+  id: number;
+  title?: string;
+  inChargeOf?: string;
+  name: string;
+  phone: string;
+}

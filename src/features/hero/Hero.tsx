@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "@mui/system";
 import { Box, Stack, Typography } from "@mui/material";
 import { CardMedia } from "@mui/material";
-import heroImage from "../../assets/img/hero_img.jpg";
+import heroImage from "@assets/img/hero_img.jpg";
 
 function Hero({}) {
   const data = {
@@ -12,7 +12,7 @@ function Hero({}) {
     location: "Querétaro",
   };
 
-  const image = heroImage
+  const image = heroImage;
 
   return (
     <Box>
@@ -26,20 +26,13 @@ function Hero({}) {
           flexWrap: "wrap",
           justifyContent: "center",
         }}
-        title="The happy couple">
-        <Stack
-          alignItems="center"
-          spacing={2}
-          sx={{ mb: 4 }}>
-          <Typography
-            variant="h2"
-            align="center"
-            flexWrap="wrap">
+        title="The happy couple"
+      >
+        <Stack alignItems="center" spacing={2} sx={{ mb: 4 }}>
+          <Typography variant="h2" align="center" flexWrap="wrap">
             {data.nameOne} & {data.nameTwo}
           </Typography>
-          <Typography variant="h4">
-            {data.location}
-          </Typography>
+          <Typography variant="h4">{data.location}</Typography>
           <Typography variant="h4" align="center">
             {data.date}
           </Typography>
