@@ -17,19 +17,19 @@ export interface ContactObject {
 }
 
 export interface GuestItem {
-  id: number | string;
-  name: string;
-  surname: string;
+  _id: number | string;
+  guests: {
+    _id: number | string;
+    name: string;
+    surname: string;
+    status: Boolean;
+    menu: Object;
+  }[];
 }
-
-export interface GuestItems extends Array<GuestItem> {}
 
 export interface OptionToggleButtonProps {
   guestId: string | number;
-  
 }
-
-
 
 export interface LocationObject {
   id: string;

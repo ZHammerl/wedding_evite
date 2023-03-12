@@ -24,24 +24,38 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { v4 as uuid } from "uuid";
 import OptionToggleButton from "./optionToggleButton";
 
-import {
-  GuestItem,
-  GuestItems,
-} from "../../interfaces/interfaces";
+import { GuestItem } from "../../interfaces/interfaces";
 
 function Rsvp() {
-  const [newGuests, setNewGuests] = useState<GuestItems>(
-    [] as GuestItems
-  );
+  const [guestData, setGuestData] = useState<GuestItem>({
+    _id: "",
+    guests: [
+      {
+        _id: 1,
+        name: "Jorge",
+        surname: "Rodriguez",
+        status: false,
+        menu: {
+          option1: false,
+          option2: false,
+        },
+      },
+      {
+        _id: 2,
+        name: "",
+        surname: "Hammerl",
+        status: false,
+        menu: {
+          option1: false,
+          option2: false,
+        },
+      },
+    ],
+  });
 
-  const guests: GuestItem[] = [
-    {
-      id: 1,
-      name: "Jorge",
-      surname: "Rodriguez",
-    },
-    { id: 2, name: "Franziska", surname: "Hammerl" },
-  ];
+  useEffect(() => {
+    console.log(guestData);
+  }, [guestData]);
 
   const menu = {
     menuOne: "vegetariano",
@@ -49,16 +63,28 @@ function Rsvp() {
   };
 
   const addGuest = () => {
-    setNewGuests([
-      ...newGuests,
-      { id: uuid(), name: "", surname: "" },
-    ]);
+    guestData.guests.push({
+      _id: 2,
+      name: "",
+      surname: "",
+      status: false,
+      menu: {
+        option1: false,
+        option2: false,
+      },
+    });
+    console.log(guestData);
   };
 
   const removeGuest = (id: string | number) => {
-    setNewGuests((current) =>
-      current.filter((guest) => guest.id !== id)
+    const guests = guestData.guests;
+    const index = guests.findIndex(
+      (guest) => guest._id === id
     );
+    if (index > -1) {
+      guests.splice(index, 1);
+    }
+    console.log(guestData);
   };
 
   return (
@@ -79,11 +105,27 @@ function Rsvp() {
           flexWrap: "wrap",
           gap: 2,
         }}>
-        {guests.map((guest) => (
+        {guestData.guests.map((guest) => (
           <Card
-            key={guest.id}
+            key={guest._id}
             variant="outlined"
             sx={{ px: 2 }}>
+            {guest.name === "" && (
+              <Box sx={{ position: "relative" }}>
+                <ClearIcon
+                  sx={{
+                    position: "absolute",
+                    top: 10,
+                    right: 0,
+                    "&:hover": {
+                      color: "red",
+                      cursor: "pointer",
+                    },
+                  }}
+                  onClick={() => removeGuest(guest._id)}
+                />
+              </Box>
+            )}
             <CardContent
               sx={{
                 px: 2,
@@ -92,14 +134,35 @@ function Rsvp() {
                 gap: 2,
                 width: 220,
               }}>
-              <Typography variant="h6">
-                {guest.name}
-              </Typography>
+              {guest.name != "" ? (
+                <Box>
+                  <Typography variant="h6">
+                    {guest.name}
+                  </Typography>
+                </Box>
+              ) : (
+                <Box>
+                  <FormControl>
+                    <TextField
+                      id="name"
+                      label="Nombre"
+                      required
+                      variant="standard"></TextField>
+                  </FormControl>
+                  <FormControl>
+                    <TextField
+                      id="surname"
+                      label="Apellido"
+                      required
+                      variant="standard"></TextField>
+                  </FormControl>
+                </Box>
+              )}
               <Box className="feedback-wrapper">
                 <Typography variant="body1" mb={1}>
                   ¿Vienes a nuestra boda?
                 </Typography>
-                <OptionToggleButton guestId={guest.id} />
+                <OptionToggleButton guestId={guest._id} />
               </Box>{" "}
               <FormControl sx={{ mt: 2 }}>
                 <Typography variant="body1" mb={1}>
@@ -117,7 +180,7 @@ function Rsvp() {
                     label={menu.menuOne}
                   />
                   <FormControlLabel
-                    value={menu.menuTwo}
+                    value={menu.menuOne}
                     control={<Radio />}
                     label={menu.menuTwo}
                   />
@@ -126,79 +189,6 @@ function Rsvp() {
             </CardContent>
           </Card>
         ))}
-        {newGuests.length != 0 &&
-          newGuests.map((guest) => (
-            <Card
-              variant="outlined"
-              sx={{ px: 2 }}
-              key={guest.id}>
-              <Box sx={{ textAlign: "right" }}>
-                <ClearIcon
-                  sx={{
-                    mt: 2,
-                    "&:hover": {
-                      color: "red",
-                      cursor: "pointer",
-                    },
-                  }}
-                  onClick={() => removeGuest(guest.id)}
-                />
-              </Box>
-              <CardContent
-                sx={{
-                  pt: 0,
-                  px: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 2,
-                  width: 220,
-                }}>
-                <FormControl>
-                  <TextField
-                    id="name"
-                    label="Nombre"
-                    required
-                    variant="standard"></TextField>
-                </FormControl>
-                <FormControl>
-                  <TextField
-                    id="surname"
-                    label="Apellido"
-                    required
-                    variant="standard"></TextField>
-                </FormControl>
-                <Box className="feedback-wrapper">
-                  <Typography variant="body1" mb={1}>
-                    ¿Vienes a nuestra boda?
-                  </Typography>
-                  <OptionToggleButton guestId={guest.id} />
-                </Box>{" "}
-                <FormControl sx={{ mt: 2 }}>
-                  <Typography variant="body1" mb={1}>
-                    ¿Qué menú prefieres?
-                  </Typography>
-
-                  <RadioGroup
-                    aria-labelledby="menu-selection"
-                    name="controlled-radio-buttons-group"
-                    // value={value}
-                    // onChange={handleChange}
-                  >
-                    <FormControlLabel
-                      value={menu.menuOne}
-                      control={<Radio />}
-                      label={menu.menuOne}
-                    />
-                    <FormControlLabel
-                      value={menu.menuTwo}
-                      control={<Radio />}
-                      label={menu.menuTwo}
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </CardContent>
-            </Card>
-          ))}
       </Container>
       <Button
         variant="outlined"
