@@ -42,7 +42,7 @@ function Rsvp() {
       },
       {
         _id: 2,
-        name: "",
+        name: "Franziska",
         surname: "Hammerl",
         status: false,
         menu: {
@@ -53,38 +53,43 @@ function Rsvp() {
     ],
   });
 
-  useEffect(() => {
-    console.log(guestData);
-  }, [guestData]);
-
   const menu = {
     menuOne: "vegetariano",
     menuTwo: "con carne",
   };
 
   const addGuest = () => {
-    guestData.guests.push({
-      _id: 2,
-      name: "",
-      surname: "",
-      status: false,
-      menu: {
-        option1: false,
-        option2: false,
-      },
+    setGuestData((prev) => {
+      const newGuests = {
+        ...prev,
+        guests: [...prev.guests],
+      };
+      newGuests.guests.push({
+        _id: uuid(),
+        name: "",
+        surname: "",
+        status: false,
+        menu: {
+          option1: false,
+          option2: false,
+        },
+      });
+      return newGuests;
     });
-    console.log(guestData);
   };
 
   const removeGuest = (id: string | number) => {
-    const guests = guestData.guests;
-    const index = guests.findIndex(
-      (guest) => guest._id === id
-    );
-    if (index > -1) {
-      guests.splice(index, 1);
-    }
-    console.log(guestData);
+    setGuestData((prev) => {
+      let newGuests = {
+        ...prev,
+        guests: [
+          ...prev.guests.filter(
+            (guest) => guest._id !== id
+          ),
+        ],
+      };
+      return newGuests;
+    });
   };
 
   return (
@@ -110,22 +115,6 @@ function Rsvp() {
             key={guest._id}
             variant="outlined"
             sx={{ px: 2 }}>
-            {guest.name === "" && (
-              <Box sx={{ position: "relative" }}>
-                <ClearIcon
-                  sx={{
-                    position: "absolute",
-                    top: 10,
-                    right: 0,
-                    "&:hover": {
-                      color: "red",
-                      cursor: "pointer",
-                    },
-                  }}
-                  onClick={() => removeGuest(guest._id)}
-                />
-              </Box>
-            )}
             <CardContent
               sx={{
                 px: 2,
@@ -142,6 +131,20 @@ function Rsvp() {
                 </Box>
               ) : (
                 <Box>
+                  <Box sx={{ position: "relative" }}>
+                    <ClearIcon
+                      sx={{
+                        position: "absolute",
+                        top: 0,
+                        right: -15,
+                        "&:hover": {
+                          color: "red",
+                          cursor: "pointer",
+                        },
+                      }}
+                      onClick={() => removeGuest(guest._id)}
+                    />
+                  </Box>
                   <FormControl>
                     <TextField
                       id="name"
