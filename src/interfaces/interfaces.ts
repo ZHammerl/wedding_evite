@@ -24,9 +24,13 @@ export interface GuestItem {
 
 export interface GuestItems extends Array<GuestItem> {}
 
-export interface RadioButtonProps{
-  data: { value: string }[];
-};
+export interface OptionToggleButtonProps {
+  guestId: string | number;
+  
+}
+
+
+
 export interface LocationObject {
   id: string;
   title: string;

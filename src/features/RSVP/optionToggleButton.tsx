@@ -5,7 +5,7 @@ import {
   ToggleButtonGroup,
   styled,
 } from "@mui/material";
-import { RadioButtonProps } from "../interfaces/interfaces";
+import { OptionToggleButtonProps } from "../../interfaces/interfaces";
 
 const SiToggleButton = styled(ToggleButton)(
   ({ theme }) => ({
@@ -26,7 +26,7 @@ const NoToggleButton = styled(ToggleButton)(
 );
 
 const OptionButtonGroup = styled(ToggleButtonGroup)(
-  ({ theme }) => ({
+  () => ({
     "& .MuiToggleButtonGroup-grouped:not(:last-of-type) ": {
       borderRadius: "10px",
     },
@@ -38,8 +38,9 @@ const OptionButtonGroup = styled(ToggleButtonGroup)(
 );
 
 export default function OptionToggleButton({
-  data,
-}: RadioButtonProps) {
+  guestId,
+}: OptionToggleButtonProps) {
+  
   const [userOption, setUserOption] = useState("");
 
   const handleChange = (
@@ -47,7 +48,7 @@ export default function OptionToggleButton({
     newOption: string
   ) => {
     setUserOption(newOption);
-    console.log(userOption);
+    console.log(guestId, userOption);
   };
 
   const children = [

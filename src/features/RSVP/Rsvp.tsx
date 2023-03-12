@@ -13,7 +13,6 @@ import {
   InputLabel,
   Input,
   Button,
-  ButtonGroup,
   Container,
   RadioGroup,
   TextField,
@@ -21,8 +20,9 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import SendIcon from "@mui/icons-material/Send";
+import ClearIcon from "@mui/icons-material/Clear";
 import { v4 as uuid } from "uuid";
-import OptionToggleButton from "../../components/optionToggleButton";
+import OptionToggleButton from "./optionToggleButton";
 
 import {
   GuestItem,
@@ -33,6 +33,7 @@ function Rsvp() {
   const [newGuests, setNewGuests] = useState<GuestItems>(
     [] as GuestItems
   );
+
   const guests: GuestItem[] = [
     {
       id: 1,
@@ -42,9 +43,9 @@ function Rsvp() {
     { id: 2, name: "Franziska", surname: "Hammerl" },
   ];
 
-  const menue = {
-    menueOne: "vegetariano",
-    menueTwo: "con carne",
+  const menu = {
+    menuOne: "vegetariano",
+    menuTwo: "con carne",
   };
 
   const addGuest = () => {
@@ -54,7 +55,11 @@ function Rsvp() {
     ]);
   };
 
-  const data = [{ value: "SI" }, { value: "NO" }];
+  const removeGuest = (id: string | number) => {
+    setNewGuests((current) =>
+      current.filter((guest) => guest.id !== id)
+    );
+  };
 
   return (
     <Box
@@ -92,29 +97,29 @@ function Rsvp() {
               </Typography>
               <Box className="feedback-wrapper">
                 <Typography variant="body1" mb={1}>
-                  Vienes a nuestra boda?
+                  ¿Vienes a nuestra boda?
                 </Typography>
-                <OptionToggleButton data={data} />
-              </Box>
+                <OptionToggleButton guestId={guest.id} />
+              </Box>{" "}
               <FormControl sx={{ mt: 2 }}>
-                <FormLabel id="menue-selection" >
-                  Qué menue prefieres?
-                </FormLabel>
+                <Typography variant="body1" mb={1}>
+                  ¿Qué menú prefieres?
+                </Typography>
                 <RadioGroup
-                  aria-labelledby="menue-selection"
+                  aria-labelledby="menu-selection"
                   name="controlled-radio-buttons-group"
                   // value={value}
                   // onChange={handleChange}
                 >
                   <FormControlLabel
-                    value={menue.menueOne}
+                    value={menu.menuOne}
                     control={<Radio />}
-                    label={menue.menueOne}
+                    label={menu.menuOne}
                   />
                   <FormControlLabel
-                    value={menue.menueTwo}
+                    value={menu.menuTwo}
                     control={<Radio />}
-                    label={menue.menueTwo}
+                    label={menu.menuTwo}
                   />
                 </RadioGroup>
               </FormControl>
@@ -127,8 +132,21 @@ function Rsvp() {
               variant="outlined"
               sx={{ px: 2 }}
               key={guest.id}>
+              <Box sx={{ textAlign: "right" }}>
+                <ClearIcon
+                  sx={{
+                    mt: 2,
+                    "&:hover": {
+                      color: "red",
+                      cursor: "pointer",
+                    },
+                  }}
+                  onClick={() => removeGuest(guest.id)}
+                />
+              </Box>
               <CardContent
                 sx={{
+                  pt: 0,
                   px: 2,
                   display: "flex",
                   flexDirection: "column",
@@ -151,29 +169,30 @@ function Rsvp() {
                 </FormControl>
                 <Box className="feedback-wrapper">
                   <Typography variant="body1" mb={1}>
-                    Vienes a nuestra boda?
+                    ¿Vienes a nuestra boda?
                   </Typography>
-                  <OptionToggleButton data={data} />
+                  <OptionToggleButton guestId={guest.id} />
                 </Box>{" "}
                 <FormControl sx={{ mt: 2 }}>
-                  <FormLabel id="menue-selection">
-                    Qué menue prefieres?
-                  </FormLabel>
+                  <Typography variant="body1" mb={1}>
+                    ¿Qué menú prefieres?
+                  </Typography>
+
                   <RadioGroup
-                    aria-labelledby="menue-selection"
+                    aria-labelledby="menu-selection"
                     name="controlled-radio-buttons-group"
                     // value={value}
                     // onChange={handleChange}
                   >
                     <FormControlLabel
-                      value={menue.menueOne}
+                      value={menu.menuOne}
                       control={<Radio />}
-                      label={menue.menueOne}
+                      label={menu.menuOne}
                     />
                     <FormControlLabel
-                      value={menue.menueTwo}
+                      value={menu.menuTwo}
                       control={<Radio />}
-                      label={menue.menueTwo}
+                      label={menu.menuTwo}
                     />
                   </RadioGroup>
                 </FormControl>
