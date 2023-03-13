@@ -60,35 +60,30 @@ function Rsvp() {
 
   const addGuest = () => {
     setGuestData((prev) => {
-      const newGuests = {
-        ...prev,
-        guests: [...prev.guests],
-      };
-      newGuests.guests.push({
-        _id: uuid(),
-        name: "",
-        surname: "",
-        status: false,
-        menu: {
-          option1: false,
-          option2: false,
+      const updatedGuests = [
+        ...prev.guests,
+        {
+          _id: uuid(),
+          name: "",
+          surname: "",
+          status: false,
+          menu: {
+            option1: false,
+            option2: false,
+          },
         },
-      });
-      return newGuests;
+      ];
+      return { ...prev, guests: updatedGuests };
     });
   };
 
   const removeGuest = (id: string | number) => {
     setGuestData((prev) => {
-      let newGuests = {
-        ...prev,
-        guests: [
-          ...prev.guests.filter(
-            (guest) => guest._id !== id
-          ),
-        ],
-      };
-      return newGuests;
+      const updatedGuests = [
+        ...prev.guests.filter((guest) => guest._id !== id),
+      ];
+
+      return { ...prev, guests: updatedGuests };
     });
   };
 
