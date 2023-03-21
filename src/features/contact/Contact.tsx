@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Drawer,
@@ -20,8 +20,22 @@ import {
 } from "@mui/material";
 import * as styles from "@contact/contact.style";
 import { WeddingHelper } from "@interfaces/interfaces";
+import axios from "axios";
 
 function Contact() {
+  const instance = axios.create({ baseURL: "http://localhost:9090/api/v1" });
+  const [event, setEvent] = useState({});
+  const [contact, setContact] = useState([]);
+  useEffect(() => {
+    instance
+      .get("/event/641a107e4cd2c302066e93af")
+      .then((response) => setContact(response.data.event.contact))
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+  console.log(contact);
+
   const weddingHelpers: WeddingHelper[] = [
     {
       id: 1,
@@ -44,13 +58,13 @@ function Contact() {
         ¿Tienes preguntas?
       </Typography>
       <Container maxWidth="lg" sx={styles.helpersContainer}>
-        {weddingHelpers.map((helper) => (
-          <Container key={helper.id} maxWidth="xs" sx={styles.helperContainer}>
-            <Typography>{helper?.title}</Typography>
-            <Typography>{helper.name}</Typography>
-            {helper.inChargeOf && <Typography>Contactame para:</Typography>}
-            <Typography>{helper?.inChargeOf}</Typography>
-            <Typography>{helper.phone}</Typography>
+        {contact.map((contact) => (
+          <Container key={contact.id} maxWidth="xs" sx={styles.helperContainer}>
+            <Typography>{contact.title}</Typography>
+            <Typography>{contact.name}</Typography>
+            {contact.inChargeOf && <Typography>Contactame para:</Typography>}
+            <Typography>{contact?.inChargeOf}</Typography>
+            <Typography>{contact.phone}</Typography>
           </Container>
         ))}
       </Container>
