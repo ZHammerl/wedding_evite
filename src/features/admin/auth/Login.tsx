@@ -3,23 +3,14 @@ import {
   Box,
   Stack,
   Typography,
-  Card,
-  CardContent,
-  CardActions,
   Button,
   TextField,
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  IconButton,
-  OutlinedInput,
   Container,
   Grid,
   Paper,
 } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { borderRadius } from "@mui/system";
 import { LoginType } from "@root/types/types";
+import { useNotification } from "@root/context/notification.context";
 
 const Login = () => {
   const [loginData, setLoginData] = useState<LoginType>({
@@ -27,6 +18,11 @@ const Login = () => {
     password: "",
   });
 
+  const { getError } = useNotification();
+  const handleClick = () => {
+    getError("Hello");
+    console.log("register");
+  };
   const loginDataHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
@@ -51,7 +47,6 @@ const Login = () => {
             <Box component="form" onSubmit={submitHandler}>
               <TextField
                 margin="normal"
-                autoComplete="false"
                 fullWidth
                 type="email"
                 name="email"
@@ -79,7 +74,7 @@ const Login = () => {
               >
                 Login in
               </Button>
-              <Button>Register</Button>
+              <Button onClick={handleClick}>Register</Button>
             </Box>
           </Paper>
         </Grid>

@@ -1,3 +1,5 @@
+import { AlertColor } from "@mui/material";
+
 export type MenuItems = {
   home: string;
   details: string;
@@ -16,8 +18,16 @@ export type LoginType = {
   email: string;
   password: string;
 };
+
 export type RegisterType = {
   email: string;
   password: string;
   confirmPassword: string;
+};
+
+export type NotificationProps = {
+  open: boolean;
+  message: string;
+  severity: AlertColor | undefined;
+  handleClose: () => void;
 };
