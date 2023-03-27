@@ -11,3 +11,13 @@ export type Contact = {
   contactOne: string[];
   contactTwo?: string[];
 };
+
+export type LoginType = {
+  email: string;
+  password: string;
+};
+export type RegisterType = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
