@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Box,
-  Stack,
   Typography,
   Button,
   TextField,
@@ -11,6 +10,7 @@ import {
 } from "@mui/material";
 import { LoginType } from "@root/types/types";
 import { useNotification } from "@root/context/notification.context";
+import { LoginValidate } from "@helpers/validateForm";
 
 const Login = () => {
   const [loginData, setLoginData] = useState<LoginType>({
@@ -18,18 +18,21 @@ const Login = () => {
     password: "",
   });
 
-  const { getError } = useNotification();
-  const handleClick = () => {
-    getError("Hello");
-    console.log("register");
-  };
+  const { getError, getSuccess } = useNotification();
+
   const loginDataHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
   const submitHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log(loginData);
+    LoginValidate.validate(loginData)
+      .then(() => {
+        getSuccess(JSON.stringify(loginData));
+      })
+      .catch((error) => {
+        getError(error.message);
+      });
   };
 
   return (
@@ -51,7 +54,6 @@ const Login = () => {
                 type="email"
                 name="email"
                 label="Email"
-                required
                 sx={{ mt: 2, mb: 1.5 }}
                 onChange={loginDataHandler}
               />
@@ -61,7 +63,6 @@ const Login = () => {
                 type="password"
                 name="password"
                 label="Password"
-                required
                 sx={{ mt: 1.5, mb: 1.5 }}
                 onChange={loginDataHandler}
               />
@@ -74,7 +75,7 @@ const Login = () => {
               >
                 Login in
               </Button>
-              <Button onClick={handleClick}>Register</Button>
+              <Button>Register</Button>
             </Box>
           </Paper>
         </Grid>
