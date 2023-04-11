@@ -20,6 +20,8 @@ export type LoginType = {
 };
 
 export type RegisterType = {
+  name: string;
+  lastName: string;
   email: string;
   password: string;
   confirmPassword: string;

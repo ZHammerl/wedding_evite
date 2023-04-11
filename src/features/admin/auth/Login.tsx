@@ -11,12 +11,14 @@ import {
 import { LoginType } from "@root/types/types";
 import { useNotification } from "@root/context/notification.context";
 import { LoginValidate } from "@helpers/validateForm";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [loginData, setLoginData] = useState<LoginType>({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const { getError, getSuccess } = useNotification();
 
@@ -73,9 +75,9 @@ const Login = () => {
                 variant="contained"
                 sx={{ mt: 1.5, mb: 3 }}
               >
-                Login in
+                Login
               </Button>
-              <Button>Register</Button>
+              <Button onClick={() => navigate("/register")}>Register</Button>
             </Box>
           </Paper>
         </Grid>
