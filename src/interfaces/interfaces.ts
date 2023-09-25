@@ -32,3 +32,18 @@ export interface WeddingHelper {
   name: string;
   phone: string;
 }
+
+export interface Guest {
+  id: string;
+  familyId: string;
+  eventId: string;
+  name: string;
+  surname?: string;
+  menu: string;
+  status: boolean;
+}
+
+export interface guestList {
+  guestCount: number;
+  guestList: Guest[];
+}

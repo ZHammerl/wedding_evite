@@ -44,7 +44,7 @@ const Login = () => {
         display: "flex",
         alignContent: "center",
         justifyContent: "center",
-        height: "100vh",
+        height: "100%",
       }}
     >
       <Paper sx={{ padding: "1.2em", borderRadius: "0.5em", width: "350px" }}>
