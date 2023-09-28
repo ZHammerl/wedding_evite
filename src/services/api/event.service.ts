@@ -6,3 +6,6 @@ class EventService {
     return response;
   }
 }
+
+export const eventService= new EventService();
+
