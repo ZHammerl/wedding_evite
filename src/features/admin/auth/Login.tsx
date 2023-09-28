@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Box,
-  Stack,
   Typography,
   Button,
   TextField,
@@ -11,25 +10,31 @@ import {
 } from "@mui/material";
 import { LoginType } from "@root/types/types";
 import { useNotification } from "@root/context/notification.context";
+import { LoginValidate } from "@helpers/validateForm";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [loginData, setLoginData] = useState<LoginType>({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
-  const { getError } = useNotification();
-  const handleClick = () => {
-    getError("Hello");
-    console.log("register");
-  };
+  const { getError, getSuccess } = useNotification();
+
   const loginDataHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
   const submitHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log(loginData);
+    LoginValidate.validate(loginData)
+      .then(() => {
+        getSuccess(JSON.stringify(loginData));
+      })
+      .catch((error) => {
+        getError(error.message);
+      });
   };
 
   return (
@@ -51,7 +56,6 @@ const Login = () => {
                 type="email"
                 name="email"
                 label="Email"
-                required
                 sx={{ mt: 2, mb: 1.5 }}
                 onChange={loginDataHandler}
               />
@@ -61,7 +65,6 @@ const Login = () => {
                 type="password"
                 name="password"
                 label="Password"
-                required
                 sx={{ mt: 1.5, mb: 1.5 }}
                 onChange={loginDataHandler}
               />
@@ -72,9 +75,9 @@ const Login = () => {
                 variant="contained"
                 sx={{ mt: 1.5, mb: 3 }}
               >
-                Login in
+                Login
               </Button>
-              <Button onClick={handleClick}>Register</Button>
+              <Button onClick={() => navigate("/register")}>Register</Button>
             </Box>
           </Paper>
         </Grid>
