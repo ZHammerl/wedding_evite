@@ -7,8 +7,14 @@ type ThemeProp = {
 };
 
 export enum themePalette {
-  BG = "#12181b",
-  LIME = "#c8fa5f",
+  COLOR_BG = "#FFFADD",
+  COLOR_LIME = "#c8fa5f",
+  COLOR_PRIMARY_BTN = "#DAC0A3",
+  COLOR_FONT = "#0F2C59",
+  COLOR_NAV = "#EADBC8",
+  COLOR_CARD = "#FEFCF3",
+  COLOR_IMPORTANT_FONT = "#A64B2A",
+  COLOR_FONT_FAINT = "#826F66",
   FONT_GLOBAL = "", //tipografia
 }
 
@@ -16,10 +22,10 @@ const theme = createTheme({
   palette: {
     mode: "light",
     background: {
-      default: themePalette.BG,
+      default: themePalette.COLOR_BG,
     },
     primary: {
-      main: themePalette.LIME,
+      main: themePalette.COLOR_PRIMARY_BTN,
     },
   },
   typography: {
