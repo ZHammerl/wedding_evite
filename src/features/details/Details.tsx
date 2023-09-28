@@ -23,6 +23,7 @@ import LocationTwo from "@assets/img/locations/gettyimages-170024886-612x612.jpg
 import { LocationObject } from "@interfaces/interfaces";
 import "./details.scss";
 import * as styles from "./details.styles";
+import MapsButton from "../../components/mapsButton";
 
 function Details() {
   const locations: LocationObject[] = [
@@ -33,7 +34,7 @@ function Details() {
       name: "Parroquia x",
       date: "12 de enero ",
       time: "14:00",
-      address: "calle 50 Centro Barrio, Mexico",
+      address: "rio escondido 1125, leon gto. 37480",
     },
     {
       id: "2",
@@ -76,19 +77,11 @@ function Details() {
                 </Box>
               </Box>
 
-              <Container>
+              <Container sx={styles.detailsCard}>
                 <Typography variant="h5">{location.name}</Typography>
                 <Typography variant="h5">{location.date}</Typography>
-                <Link
-                  variant="h5"
-                  href="http://google.com/maps"
-                  underline="hover"
-                  color="inherit"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {location.address}
-                </Link>
+                <Typography variant="h5">{location.address}</Typography>
+                <MapsButton address={location.address} />
               </Container>
             </Stack>
           </Card>

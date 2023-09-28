@@ -31,7 +31,7 @@ export default function Navbar() {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
+      <Typography variant="h6" sx={{ my: 4 }}>
         {Helpers.getInitials([bridalCouple.nameOne, bridalCouple.nameTwo])}
       </Typography>
       <Divider />
@@ -57,7 +57,7 @@ export default function Navbar() {
     <Box sx={{ display: "flex" }}>
       <AppBar
         component="nav"
-        position="fixed"
+        position="sticky"
         sx={{ backgroundColor: "#F0A04B" }}
       >
         <Toolbar>
