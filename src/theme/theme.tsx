@@ -7,9 +7,12 @@ type ThemeProp = {
 };
 
 export enum themePalette {
-  BG = "#12181b",
-  LIME = "#c8fa5f",
+  BG = "#F9F5EB",
+  LIME = "#675D50",
   FONT_GLOBAL = "", //tipografia
+  //Alert styles
+  ERROR_MAIN = "#f44336",
+  BG_ERROR_MAIN = "rgba(244,67,54,0.1)",
 }
 
 declare module '@mui/material/styles' {
@@ -49,6 +52,20 @@ const theme = createTheme({
         style: {
           textTransform: "none",
           borderRadius: "0.5em",
+        },
+      },
+    },
+    MuiAlert: {
+      defaultProps: {
+        style: {
+          fontSize: "1em",
+          borderRadius: "0.8em",
+        },
+      },
+      styleOverrides: {
+        standardError: {
+          border: `1px solid ${themePalette.ERROR_MAIN}`,
+          background: themePalette.BG_ERROR_MAIN,
         },
       },
     },
