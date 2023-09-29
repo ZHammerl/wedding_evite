@@ -97,10 +97,9 @@ function Rsvp() {
       message: text,
     };
     setShow(false);
+    console.log(rsvpData);
     return rsvpData;
   };
-
-  
 
   return (
     <Box sx={styles.rsvpContainer}>

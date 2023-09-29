@@ -36,7 +36,7 @@ export default function OptionToggleButton({
   guestData,
   setGuestData,
 }: Props) {
-  const [userOption, setUserOption] = useState<boolean>(false);
+  const [userOption, setUserOption] = useState<boolean>();
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,

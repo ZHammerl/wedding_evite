@@ -17,3 +17,11 @@ export const sectionContainer = {
   backgroundColor: "#EDDBC7",
   padding: "2em",
 };
+
+export const detailsCard = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  textAlign: "center",
+  gap: 1,
+};

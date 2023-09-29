@@ -14,17 +14,19 @@ export type Contact = {
   contactTwo?: string[];
 };
 
-<<<<<<< HEAD
+
 export type MenuType = {
   menuOne: string;
   menuTwo: string;
-=======
+}
 export type LoginType = {
   email: string;
   password: string;
 };
 
 export type RegisterType = {
+  name: string;
+  lastName: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -35,5 +37,5 @@ export type NotificationProps = {
   message: string;
   severity: AlertColor | undefined;
   handleClose: () => void;
->>>>>>> develop
+
 };

@@ -21,7 +21,8 @@
     "react-router-dom": "^6.8.2",
     "sass": "^1.58.3",
     "uuid": "^9.0.0",
-    "vite-tsconfig-paths": "^4.0.5"
+    "vite-tsconfig-paths": "^4.0.5",
+    "yup": "^1.0.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.199",
