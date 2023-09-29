@@ -1,5 +1,5 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { isEmpty } from "lodash";
 import {
   Box,
   Typography,
@@ -25,35 +25,41 @@ import { v4 as uuid } from "uuid";
 import OptionToggleButton from "./optionToggleButton";
 import * as styles from "./rsvp.style";
 import { GuestItem } from "../../interfaces/interfaces";
+import { GuestCards } from "./GuestCard";
+import { MenuType } from "@root/types/types";
+
+export type AdditionalGuestName = {
+  name: string;
+  surname: string;
+  id: string;
+};
 
 function Rsvp() {
+  const [text, setText] = useState<string>("");
+  const [show, setShow] = useState<boolean>(true);
   const [guestData, setGuestData] = useState<GuestItem>({
     _id: "",
     guests: [
       {
-        _id: 1,
+        _id: "1",
         name: "Jorge",
         surname: "Rodriguez",
         status: false,
-        menu: {
-          option1: false,
-          option2: false,
-        },
+        menuChoice: "",
+        additionalGuest: false,
       },
       {
-        _id: 2,
+        _id: "2",
         name: "Franziska",
         surname: "Hammerl",
         status: false,
-        menu: {
-          option1: false,
-          option2: false,
-        },
+        menuChoice: "",
+        additionalGuest: false,
       },
     ],
   });
 
-  const menu = {
+  const menu: MenuType = {
     menuOne: "vegetariano",
     menuTwo: "con carne",
   };
@@ -67,10 +73,8 @@ function Rsvp() {
           name: "",
           surname: "",
           status: false,
-          menu: {
-            option1: false,
-            option2: false,
-          },
+          menuChoice: "",
+          additionalGuest: true,
         },
       ];
       return { ...prev, guests: updatedGuests };
@@ -87,83 +91,30 @@ function Rsvp() {
     });
   };
 
+  const handleSubmit = () => {
+    const rsvpData = {
+      guests: guestData.guests,
+      message: text,
+    };
+    setShow(false);
+    return rsvpData;
+  };
+
+  
+
   return (
     <Box sx={styles.rsvpContainer}>
       <Typography variant="h3">Confirmar asistencia</Typography>
-      <Container className="card-wrapper" sx={styles.cardWrapper}>
-        {guestData.guests.map((guest) => (
-          <Card key={guest._id} variant="outlined">
-            <CardContent sx={styles.cardContent}>
-              {guest.name != "" ? (
-                <Box>
-                  <Typography variant="h6">{guest.name}</Typography>
-                </Box>
-              ) : (
-                <Box>
-                  <Box sx={{ position: "relative" }}>
-                    <ClearIcon
-                      sx={{
-                        position: "absolute",
-                        top: 0,
-                        right: -15,
-                        "&:hover": {
-                          color: "red",
-                          cursor: "pointer",
-                        },
-                      }}
-                      onClick={() => removeGuest(guest._id)}
-                    />
-                  </Box>
-                  <FormControl>
-                    <TextField
-                      id="name"
-                      label="Nombre"
-                      required
-                      variant="standard"
-                    ></TextField>
-                  </FormControl>
-                  <FormControl>
-                    <TextField
-                      id="surname"
-                      label="Apellido"
-                      required
-                      variant="standard"
-                    ></TextField>
-                  </FormControl>
-                </Box>
-              )}
-              <Box className="feedback-wrapper" sx={styles.feedbackWrapper}>
-                <Typography variant="body1">¿Vienes a nuestra boda?</Typography>
-                <OptionToggleButton guestId={guest._id} />
-              </Box>
-              <FormControl sx={styles.feedbackWrapper}>
-                <Typography variant="body1">¿Qué menú prefieres?</Typography>
-                <RadioGroup
-                  aria-labelledby="menu-selection"
-                  name="controlled-radio-buttons-group"
-                  // value={value}
-                  // onChange={handleChange}
-                >
-                  <FormControlLabel
-                    value={menu.menuOne}
-                    control={<Radio />}
-                    label={menu.menuOne}
-                  />
-                  <FormControlLabel
-                    value={menu.menuOne}
-                    control={<Radio />}
-                    label={menu.menuTwo}
-                  />
-                </RadioGroup>
-              </FormControl>
-            </CardContent>
-          </Card>
-        ))}
-      </Container>
+      <Container className="card-wrapper" sx={styles.cardWrapper}></Container>
       <Button variant="outlined" startIcon={<AddIcon />} onClick={addGuest}>
         Agregar invitado
       </Button>
-
+      <GuestCards
+        guestData={guestData}
+        setGuestData={setGuestData}
+        removeGuest={removeGuest}
+        menu={menu}
+      />
       <Card sx={styles.cardWrapper}>
         <CardContent sx={styles.message}>
           <Typography>Mensaje</Typography>
@@ -172,6 +123,10 @@ function Rsvp() {
               id="message-box"
               placeholder="Aquí nos pueden dejar un mensaje..."
               variant="filled"
+              value={text}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setText(event.target.value);
+              }}
               fullWidth
               multiline
               rows={4}
@@ -180,7 +135,7 @@ function Rsvp() {
         </CardContent>
       </Card>
 
-      <Button variant="outlined" endIcon={<SendIcon />}>
+      <Button variant="outlined" endIcon={<SendIcon />} onClick={handleSubmit}>
         Enviar
       </Button>
     </Box>

@@ -16,19 +16,18 @@ export interface ContactObject {
   contactTwo?: string[];
 }
 
-export interface GuestItem {
-  _id: number | string;
-  guests: {
-    _id: number | string;
-    name: string;
-    surname: string;
-    status: Boolean;
-    menu: Object;
-  }[];
+export interface Guest {
+  _id: string;
+  name: string;
+  surname: string;
+  status: Boolean;
+  menuChoice: string;
+  additionalGuest: boolean;
 }
 
-export interface OptionToggleButtonProps {
-  guestId: string | number;
+export interface GuestItem {
+  _id: number | string;
+  guests: Guest[];
 }
 
 export interface LocationObject {

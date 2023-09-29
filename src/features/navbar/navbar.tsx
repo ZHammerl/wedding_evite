@@ -22,7 +22,6 @@ const navItems = ["Inicio", "Detalles", "Extras", "Contacto", "RSVP"];
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const handleClick = (item: string) => {
-    console.log(item);
   };
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);

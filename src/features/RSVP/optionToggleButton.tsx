@@ -1,61 +1,73 @@
 import React, { useState } from "react";
-import {
-  Box,
-  ToggleButton,
-  ToggleButtonGroup,
-  styled,
-} from "@mui/material";
-import { OptionToggleButtonProps } from "../../interfaces/interfaces";
+import { Box, ToggleButton, ToggleButtonGroup, styled } from "@mui/material";
+import { GuestItem } from "@interfaces/interfaces";
 
-const SiToggleButton = styled(ToggleButton)(
-  ({ theme }) => ({
-    color: "black",
-    "&.Mui-selected": {
-      backgroundColor: theme.palette.yes.main,
-    },
-  })
-);
+const SiToggleButton = styled(ToggleButton)(({ theme }) => ({
+  color: "black",
+  "&.Mui-selected": {
+    backgroundColor: theme.palette.yes.main,
+  },
+}));
 
-const NoToggleButton = styled(ToggleButton)(
-  ({ theme }) => ({
-    color: "black",
-    "&.Mui-selected": {
-      backgroundColor: theme.palette.no.main,
-    },
-  })
-);
+const NoToggleButton = styled(ToggleButton)(({ theme }) => ({
+  color: "black",
+  "&.Mui-selected": {
+    backgroundColor: theme.palette.no.main,
+  },
+}));
 
-const OptionButtonGroup = styled(ToggleButtonGroup)(
-  () => ({
-    "& .MuiToggleButtonGroup-grouped:not(:last-of-type) ": {
-      borderRadius: "10px",
-    },
-    "& .MuiToggleButtonGroup-grouped:not(:first-of-type)": {
-      borderRadius: "10px",
-      borderLeft: "1px solid  rgba(0, 0, 0, 0.12)",
-    },
-  })
-);
+const OptionButtonGroup = styled(ToggleButtonGroup)(() => ({
+  "& .MuiToggleButtonGroup-grouped:not(:last-of-type) ": {
+    borderRadius: "10px",
+  },
+  "& .MuiToggleButtonGroup-grouped:not(:first-of-type)": {
+    borderRadius: "10px",
+    borderLeft: "1px solid  rgba(0, 0, 0, 0.12)",
+  },
+}));
 
+type Props = {
+  guestData: GuestItem;
+  setGuestData: React.Dispatch<React.SetStateAction<GuestItem>>;
+  guestId: string;
+};
 export default function OptionToggleButton({
   guestId,
-}: OptionToggleButtonProps) {
-  
-  const [userOption, setUserOption] = useState("");
+  guestData,
+  setGuestData,
+}: Props) {
+  const [userOption, setUserOption] = useState<boolean>(false);
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
-    newOption: string
+    newOption: boolean
   ) => {
     setUserOption(newOption);
-    console.log(guestId, userOption);
+    const updatedGuests = guestData.guests.map((guest) => {
+      if (guest._id === guestId) {
+        return {
+          ...guest,
+          status: newOption,
+        };
+      }
+      return guest;
+    });
+    setGuestData({
+      ...guestData,
+      guests: updatedGuests,
+    });
   };
 
   const children = [
-    <SiToggleButton fullWidth={true} value="si" key="si">
+    <SiToggleButton
+      fullWidth={true}
+      value={true}
+      key="si"
+      defaultChecked={true}
+    >
       SI
     </SiToggleButton>,
-    <NoToggleButton fullWidth={true} value="no" key="no">
+    <NoToggleButton fullWidth={true} value={false} key="no">
       NO
     </NoToggleButton>,
   ];
@@ -75,7 +87,8 @@ export default function OptionToggleButton({
           gridTemplateColumns: "auto auto",
           gridGap: "10px",
         }}
-        {...control}>
+        {...control}
+      >
         {children}
       </OptionButtonGroup>
     </Box>

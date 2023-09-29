@@ -12,4 +12,7 @@ export type Contact = {
   contactTwo?: string[];
 };
 
-
+export type MenuType = {
+  menuOne: string;
+  menuTwo: string;
+};
