@@ -25,6 +25,17 @@ export enum themePalette {
   BG_SUCCESS_MAIN = "rgba(102,187,106,0.1)",
 }
 
+declare module '@mui/material/styles' {
+  
+  interface Palette {
+    yes: Palette['primary'];
+    no: Palette['primary'];
+  }
+  interface PaletteOptions {
+    yes: PaletteOptions['primary'];
+    no: PaletteOptions['primary'];
+  }}
+
 const theme = createTheme({
   palette: {
     mode: "light",
@@ -34,6 +45,12 @@ const theme = createTheme({
     primary: {
       main: themePalette.COLOR_PRIMARY_BTN,
     },
+    yes:{
+      main: "#388e3c"
+    }, 
+    no: {
+      main: "#d32f2f"
+    }
   },
   typography: {
     fontFamily: themePalette.FONT_GLOBAL,

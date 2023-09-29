@@ -15,6 +15,22 @@ export interface ContactObject {
   contactOne: string[];
   contactTwo?: string[];
 }
+
+export interface GuestItem {
+  _id: number | string;
+  guests: {
+    _id: number | string;
+    name: string;
+    surname: string;
+    status: Boolean;
+    menu: Object;
+  }[];
+}
+
+export interface OptionToggleButtonProps {
+  guestId: string | number;
+}
+
 export interface LocationObject {
   id: string;
   title: string;
