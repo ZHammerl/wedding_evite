@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "@mui/system";
 import { Box, Divider, Stack, Typography } from "@mui/material";
 import { CardMedia } from "@mui/material";
 import heroImage from "@assets/img/hero_img.jpg";
