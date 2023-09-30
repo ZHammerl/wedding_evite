@@ -15,8 +15,16 @@ export type Contact = {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+
+export type MenuType = {
+  menuOne: string;
+  menuTwo: string;
+}
+>>>>>>> dbac4f27c5282aa89686ade8917eb1021df6c7db
 export type LoginType = {
   email: string;
   password: string;
@@ -35,5 +43,9 @@ export type NotificationProps = {
   message: string;
   severity: AlertColor | undefined;
   handleClose: () => void;
+
 };
+<<<<<<< HEAD
 >>>>>>> 8d14546dd0e56dcb9edcfdb262c010e8ef122b47
+=======
+>>>>>>> dbac4f27c5282aa89686ade8917eb1021df6c7db
