@@ -8,7 +8,7 @@ export const rsvpContainer = {
 };
 
 export const cardWrapper = {
-  //   maxWidth: 600,
+  maxWidth: 600,
   display: "flex",
   justifyContent: "center",
   flexWrap: "wrap",
@@ -33,4 +33,16 @@ export const message = {
   flexDirection: "column",
   gap: "1em",
   width: { xs: "18em", sm: "38em" },
+};
+
+export const modal = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
 };
