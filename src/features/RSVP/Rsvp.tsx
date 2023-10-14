@@ -104,17 +104,18 @@ function Rsvp() {
   return (
     <Box sx={styles.rsvpContainer}>
       <Typography variant="h3">Confirmar asistencia</Typography>
-      <Container className="card-wrapper" sx={styles.cardWrapper}></Container>
+      <Container className="card-wrapper" sx={styles.cardWrapper}>
+        <GuestCards
+          guestData={guestData}
+          setGuestData={setGuestData}
+          removeGuest={removeGuest}
+          menu={menu}
+        />
+      </Container>
       <Button variant="outlined" startIcon={<AddIcon />} onClick={addGuest}>
         Agregar invitado
       </Button>
-      <GuestCards
-        guestData={guestData}
-        setGuestData={setGuestData}
-        removeGuest={removeGuest}
-        menu={menu}
-      />
-      <Card sx={styles.cardWrapper}>
+      <Card>
         <CardContent sx={styles.message}>
           <Typography>Mensaje</Typography>
           <Box>

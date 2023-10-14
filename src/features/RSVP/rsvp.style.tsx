@@ -12,7 +12,7 @@ export const cardWrapper = {
   display: "flex",
   justifyContent: "center",
   flexWrap: "wrap",
-  gap: 2,
+  gap: "2em",
 };
 
 export const feedbackWrapper = {
@@ -24,13 +24,13 @@ export const feedbackWrapper = {
 export const cardContent = {
   display: "flex",
   flexDirection: "column",
-  gap: 2,
-  minWidth: 250,
+  gap: "2em",
+  minWidth: "18em",
 };
 
 export const message = {
   display: "flex",
   flexDirection: "column",
   gap: "1em",
-  minWidth: "40rem",
+  width: { xs: "18em", sm: "38em" },
 };
