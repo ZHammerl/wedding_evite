@@ -100,7 +100,7 @@ function Extras() {
     return (
       <List>
         {list.map((item) => (
-          <ListItem>{item}</ListItem>
+          <ListItem sx={styles.listItem}>{item}</ListItem>
         ))}
       </List>
     );
