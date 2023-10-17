@@ -21,9 +21,8 @@ import {
 import LocationOne from "@assets/img/locations/gettyimages-157610088-612x612.jpg";
 import LocationTwo from "@assets/img/locations/gettyimages-170024886-612x612.jpg";
 import { LocationObject } from "@interfaces/interfaces";
-import "./details.scss";
-import * as styles from "./details.styles";
-import MapsButton from "../../components/mapsButton";
+import * as styles from "@details/details.styles";
+import MapsButton from "@components/mapsButton";
 
 function Details() {
   const locations: LocationObject[] = [
@@ -59,18 +58,16 @@ function Details() {
     <Box component="div" sx={styles.sectionContainer}>
       <Container disableGutters sx={styles.cardsContainer}>
         {locations.map((location) => (
-          <Card key={location.id} sx={{ maxWidth: 330, py: 2 }}>
+          <Card key={location.id} sx={styles.card}>
             <Stack spacing={2}>
-              <Container sx={{ flexDirection: "row" }}>
-                <Typography variant="h4" align="center">
-                  {location.title}
-                </Typography>
-              </Container>
+              <Typography variant="h4" align="center">
+                {location.title}
+              </Typography>
               <Box>
                 <CardMedia
                   image={location.image}
                   component="img"
-                  height="230px"
+                  sx={styles.cardMedia}
                 />
                 <Box sx={styles.time}>
                   <Typography variant="h4">{location.time}</Typography>

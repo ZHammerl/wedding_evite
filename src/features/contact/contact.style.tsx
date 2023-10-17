@@ -1,5 +1,6 @@
+import { themePalette } from "@root/theme/theme";
 export const sectionContainer = {
-  backgroundColor: "#E8E2E2",
+  backgroundColor: themePalette.COLOR_BG_THREE,
   padding: "2em",
 };
 

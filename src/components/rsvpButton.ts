@@ -1,9 +1,10 @@
 import { Button, styled } from "@mui/material";
+import { themePalette } from "@root/theme/theme";
 
 export const RsvpButton = styled(Button)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.main,
-  color: "red",
+  backgroundColor: themePalette.COLOR_PRIMARY_BTN,
+  color: themePalette.COLOR_IMPORTANT_FONT,
   "&:hover": {
-    backgroundColor: "#820000",
+    backgroundColor: themePalette.BG_HOVER_BTN,
   },
 }));

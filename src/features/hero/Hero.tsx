@@ -1,8 +1,7 @@
 import React from "react";
-import { Container } from "@mui/system";
-import { Box, Stack, Typography } from "@mui/material";
-import { CardMedia } from "@mui/material";
+import { Box, Stack, Typography, CardMedia } from "@mui/material";
 import heroImage from "@assets/img/hero_img.jpg";
+import * as styles from "@hero/hero.styles";
 
 function Hero({}) {
   const data = {
@@ -16,19 +15,8 @@ function Hero({}) {
 
   return (
     <Box>
-      <CardMedia
-        image={image}
-        sx={{
-          height: 400,
-          color: "white",
-          display: "flex",
-          alignContent: "flex-end",
-          flexWrap: "wrap",
-          justifyContent: "center",
-        }}
-        title="The happy couple"
-      >
-        <Stack alignItems="center" spacing={2} sx={{ mb: 4 }}>
+      <CardMedia image={image} sx={styles.heroPicture} title="The happy couple">
+        <Stack alignItems="center" sx={styles.detailsHero}>
           <Typography variant="h2" align="center" flexWrap="wrap">
             {data.nameOne} & {data.nameTwo}
           </Typography>

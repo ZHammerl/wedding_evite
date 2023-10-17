@@ -16,13 +16,13 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { RsvpButton } from "@components/rsvpButton";
 import { Helpers } from "@helpers/helpers";
+import * as styles from "@navbar/navbar.styles";
 
 const navItems = ["Inicio", "Detalles", "Extras", "Contacto", "RSVP"];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const handleClick = (item: string) => {
-  };
+  const handleClick = (item: string) => {};
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -30,7 +30,7 @@ export default function Navbar() {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 4 }}>
+      <Typography variant="h6" sx={styles.mainNamesShort}>
         {Helpers.getInitials([bridalCouple.nameOne, bridalCouple.nameTwo])}
       </Typography>
       <Divider />
@@ -42,7 +42,7 @@ export default function Navbar() {
             </RsvpButton>
           ) : (
             <ListItem key={item} disablePadding>
-              <ListItemButton sx={{ textAlign: "center" }}>
+              <ListItemButton sx={styles.listItemDrawer}>
                 <ListItemText primary={item} />
               </ListItemButton>
             </ListItem>
@@ -53,17 +53,13 @@ export default function Navbar() {
   );
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <AppBar
-        component="nav"
-        position="sticky"
-        sx={{ backgroundColor: "#F0A04B" }}
-      >
+    <Box>
+      <AppBar component="nav" position="fixed" sx={styles.navbar}>
         <Toolbar>
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "block", sm: "none" } }}
+            sx={styles.mainNamesShortDrawer}
           >
             {Helpers.getInitials([bridalCouple.nameOne, bridalCouple.nameTwo])}
           </Typography>
@@ -72,22 +68,15 @@ export default function Navbar() {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{
-              mr: 2,
-              display: { sm: "none" },
-            }}
+            sx={styles.iconBtn}
           >
             <MenuIcon />
           </IconButton>
 
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
+          <Typography variant="h6" component="div" sx={styles.mainNames}>
             {bridalCouple.nameOne}&{bridalCouple.nameTwo}
           </Typography>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Box sx={styles.navItems}>
             {navItems.map((item) =>
               item === "RSVP" ? (
                 <RsvpButton key={item} onClick={() => handleClick(item)}>
@@ -96,7 +85,7 @@ export default function Navbar() {
               ) : (
                 <Button
                   key={item}
-                  sx={{ color: "#fff" }}
+                  sx={styles.navItemBtn}
                   onClick={() => handleClick(item)}
                 >
                   {item}
@@ -115,13 +104,7 @@ export default function Navbar() {
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: "100%",
-            },
-          }}
+          sx={styles.containerDrawer}
         >
           {drawer}
         </Drawer>
