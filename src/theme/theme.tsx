@@ -21,8 +21,12 @@ export enum themePalette {
   BG_HOVER_BTN = "#ae9982",
   LIME = "#675D50",
   BG_TRANSPARENT_WHITE = "rgba(255,255,255,0.8)",
-  FONT_GLOBAL = "", //tipografia
+  FONT_GLOBAL = "'Gluten', cursive", //tipografia
   //Alert styles
+
+  FONT_TITLE = " 'Allura', cursive",
+  FONT_NAV = "'Sue Ellen Francisco', cursive",
+  FONT_SUBTITLE = " 'Patrick Hand SC', cursive",
   ERROR_MAIN = "#f44336",
   BG_ERROR_MAIN = "rgba(244,67,54,0.1)",
   SUCCESS_MAIN = "#66bb6a",
@@ -58,7 +62,31 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: themePalette.FONT_GLOBAL,
-    fontSize: 12,
+    fontSize: 14,
+    h1: {
+      fontFamily: themePalette.FONT_TITLE,
+      fontSize: "8rem",
+      lineHeight: "6rem",
+    },
+    h2: {
+      fontFamily: themePalette.FONT_SUBTITLE,
+      fontSize: "4rem",
+      lineHeight: "3.5rem",
+    },
+    h3: {
+      fontFamily: themePalette.FONT_SUBTITLE,
+      lineHeight: "2.8rem",
+      fontSize: "3rem",
+    },
+    h4: {
+      fontFamily: themePalette.FONT_SUBTITLE,
+      fontSize: "2.5rem",
+    },
+
+    h6: {
+      fontFamily: themePalette.FONT_NAV,
+      fontSize: "2rem",
+    },
   },
   components: {
     MuiButton: {

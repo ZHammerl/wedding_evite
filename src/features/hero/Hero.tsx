@@ -17,11 +17,11 @@ function Hero({}) {
     <Box>
       <CardMedia image={image} sx={styles.heroPicture} title="The happy couple">
         <Stack alignItems="center" sx={styles.detailsHero}>
-          <Typography variant="h2" align="center" flexWrap="wrap">
+          <Typography variant="h1" align="center" flexWrap="wrap">
             {data.nameOne} & {data.nameTwo}
           </Typography>
-          <Typography variant="h4">{data.location}</Typography>
-          <Typography variant="h4" align="center">
+          <Typography variant="h3">{data.location} </Typography>
+          <Typography variant="h2" align="center">
             {data.date}
           </Typography>
         </Stack>

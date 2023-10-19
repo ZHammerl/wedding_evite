@@ -53,17 +53,8 @@ export default function Navbar() {
   );
 
   return (
-<<<<<<< HEAD
     <Box>
       <AppBar component="nav" position="fixed" sx={styles.navbar}>
-=======
-    <Box sx={{ display: "flex" }}>
-      <AppBar
-        component="nav"
-        position="fixed"
-        sx={{ backgroundColor: "#F0A04B" }}
-      >
->>>>>>> fece9c69083f7b686704168be8ddd560ddf19c11
         <Toolbar>
           <Typography
             variant="h6"

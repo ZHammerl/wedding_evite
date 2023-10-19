@@ -46,10 +46,10 @@ function Contact() {
       <Container maxWidth="lg" sx={styles.helpersContainer}>
         {weddingHelpers.map((helper) => (
           <Container key={helper.id} maxWidth="xs" sx={styles.helperContainer}>
-            <Typography>{helper?.title}</Typography>
+            <Typography variant="h5">{helper?.title}</Typography>
             <Typography>{helper.name}</Typography>
             {helper.inChargeOf && <Typography>Contactame para:</Typography>}
-            <Typography>{helper?.inChargeOf}</Typography>
+            <Typography variant="h5">{helper?.inChargeOf}</Typography>
             <Typography>{helper.phone}</Typography>
           </Container>
         ))}

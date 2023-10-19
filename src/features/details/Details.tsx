@@ -60,7 +60,7 @@ function Details() {
         {locations.map((location) => (
           <Card key={location.id} sx={styles.card}>
             <Stack spacing={2}>
-              <Typography variant="h4" align="center">
+              <Typography variant="h3" align="center">
                 {location.title}
               </Typography>
               <Box>
@@ -75,7 +75,7 @@ function Details() {
               </Box>
 
               <Container sx={styles.detailsCard}>
-                <Typography variant="h5">{location.name}</Typography>
+                <Typography variant="h4">{location.name}</Typography>
                 <Typography variant="h5">{location.date}</Typography>
                 <Typography variant="h5">{location.address}</Typography>
                 <MapsButton address={location.address} />

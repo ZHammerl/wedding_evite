@@ -36,3 +36,7 @@ export const card = {
 export const cardMedia = {
   height: "16em",
 };
+
+export const subtitle = {
+  fontFamily: themePalette.FONT_SUBTITLE,
+};
