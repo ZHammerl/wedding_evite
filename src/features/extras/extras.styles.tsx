@@ -14,10 +14,6 @@ export const container = {
 };
 
 export const image = {
-  height: "130px",
+  height: "10em",
   pt: "1em",
-};
-
-export const listItem = {
-  listStyleType: "circle", //no funciona
 };

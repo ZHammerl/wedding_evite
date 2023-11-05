@@ -22,7 +22,10 @@ import * as styles from "./extras.styles";
 
 function Extras() {
   const data = {
-    gifts: ["liverpool link", "amazon wishlist"],
+    gifts: [
+      { _id: 1, link: "liverpool link" },
+      { _id: 2, link: "amazon wishlist" },
+    ],
     dressCode: "playero", //casual, formal, playero
     childPolicy: false,
   };
@@ -32,37 +35,37 @@ function Extras() {
       case "formal":
         return (
           <Box>
-            <Typography>fromal</Typography>
             <CardMedia
               component="img"
               sx={styles.image}
               image="/src/assets/img/icons/formal.png"
               alt="formal"
             />
+            <Typography variant="h5">Fromal</Typography>
           </Box>
         );
       case "casual":
         return (
           <Box>
-            <Typography>casual</Typography>
             <CardMedia
               component="img"
               sx={styles.image}
               image="/src/assets/img/icons/casual.png"
               alt="formal"
             />
+            <Typography variant="h5">Casual</Typography>
           </Box>
         );
       case "playero":
         return (
           <Box>
-            <Typography>playero</Typography>
             <CardMedia
               component="img"
               sx={styles.image}
               image="/src/assets/img/icons/playero.png"
               alt="formal"
             />
+            <Typography variant="h5">Playero</Typography>
           </Box>
         );
     }
@@ -72,35 +75,37 @@ function Extras() {
     if (value === true) {
       return (
         <Box>
-          <Typography>permitidos</Typography>
           <CardMedia
             component="img"
             sx={styles.image}
             image="/src/assets/img/icons/kids.png"
             alt="formal"
           />
+          <Typography variant="h5">Permitidos</Typography>
         </Box>
       );
     } else {
       return (
         <Box>
-          <Typography>no permitidos</Typography>
           <CardMedia
             component="img"
             image="/src/assets/img/icons/noKids.png"
             alt="formal"
             sx={styles.image}
           />
+          <Typography variant="h5">No permitidos</Typography>
         </Box>
       );
     }
   };
 
-  const giftList = (list: string[]) => {
+  const giftList = (list: object[]) => {
     return (
       <List>
-        {list.map((item) => (
-          <ListItem sx={styles.listItem}>{item}</ListItem>
+        {list.map((item: object) => (
+          <ListItem key={item._id}>
+            <Typography variant="h5">{item.link}</Typography>
+          </ListItem>
         ))}
       </List>
     );
@@ -113,7 +118,7 @@ function Extras() {
         divider={<Divider variant="middle" orientation="horizontal" flexItem />}
       >
         <Box sx={styles.card}>
-          <Typography variant="h5">Gifts</Typography>
+          <Typography variant="h4">Gifts</Typography>
           <Box>{giftList(data.gifts)}</Box>
         </Box>
         <Stack
@@ -121,11 +126,11 @@ function Extras() {
           divider={<Divider variant="middle" orientation="vertical" flexItem />}
         >
           <Box sx={styles.card}>
-            <Typography variant="h5">Dress Code</Typography>
+            <Typography variant="h4">Dress Code</Typography>
             {dressCode(data.dressCode)}
           </Box>
           <Box sx={styles.card}>
-            <Typography variant="h5">Child Policy</Typography>
+            <Typography variant="h4">Child Policy</Typography>
             {childPolicy(data.childPolicy)}
           </Box>
         </Stack>

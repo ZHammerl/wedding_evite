@@ -18,12 +18,18 @@ import {
   Card,
   Link,
 } from "@mui/material";
+import { themePalette } from "@root/theme/theme";
 
 function MapsButton({ address }) {
   const mapsUrl = `https:/www.google.com/maps/?q=${address}`;
 
   //* Comments:
   //* Button component makes text upperCase
+
+  const style = {
+    color: "white",
+    fontFamily: themePalette.FONT_SUBTITLE,
+  };
 
   return (
     <Button variant="contained">
@@ -32,9 +38,9 @@ function MapsButton({ address }) {
         href={mapsUrl}
         variant="h5"
         target="_blank"
-        sx={{ color: "white" }}
+        sx={style}
       >
-        Ubicacion
+        <Typography variant="h5">Ubicacion</Typography>
       </Link>
     </Button>
   );

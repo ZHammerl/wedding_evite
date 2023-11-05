@@ -29,6 +29,7 @@
       "@guestList/*": ["src/features/guestList/*"],
       "@footer/*": ["src/features/footer/*"],
       "@rsvp/*": ["src/features/Rsvp/*"],
+      "@theme/*": ["src/theme/*"],
       //the last paths for root otherwise will ignore other paths
       "@root/*": ["src/*"]
     }
