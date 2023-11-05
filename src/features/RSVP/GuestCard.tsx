@@ -3,15 +3,9 @@ import {
   Box,
   Typography,
   FormControl,
-  FormGroup,
-  FormLabel,
   FormControlLabel,
   Card,
   CardContent,
-  CardActions,
-  InputLabel,
-  Input,
-  Button,
   Container,
   RadioGroup,
   TextField,
@@ -22,7 +16,6 @@ import OptionToggleButton from "./optionToggleButton";
 import * as styles from "./rsvp.style";
 import { GuestItem } from "@interfaces/interfaces";
 import { MenuType } from "@root/types/types";
-import { AdditionalGuestName } from "./Rsvp";
 
 type Props = {
   guestData: GuestItem;
@@ -72,7 +65,7 @@ export const GuestCards = ({
   };
 
   return (
-    <>
+    <Container className="card-wrapper" sx={styles.cardWrapper}>
       {guestData.guests.map((guest) => {
         const { _id: guestId, name, additionalGuest } = guest;
 
@@ -84,13 +77,11 @@ export const GuestCards = ({
                   <Typography variant="h6">{name}</Typography>
                 </Box>
               ) : (
-                <Box>
-                  <Box sx={{ position: "relative" }}>
+                <Box sx={{ position: "relative" }}>
                     <ClearIcon
                       sx={{
                         position: "absolute",
-                        top: 0,
-                        right: -15,
+                        right: 0,
                         "&:hover": {
                           color: "red",
                           cursor: "pointer",
@@ -98,7 +89,6 @@ export const GuestCards = ({
                       }}
                       onClick={() => removeGuest(guestId)}
                     />
-                  </Box>
                   <FormControl>
                     <TextField
                       id="name"
@@ -157,6 +147,6 @@ export const GuestCards = ({
           </Card>
         );
       })}
-    </>
+    </Container>
   );
 };
