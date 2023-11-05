@@ -21,9 +21,7 @@ const navItems = ["Inicio", "Detalles", "Extras", "Contacto", "RSVP"];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const handleClick = (item: string) => {
-    console.log(item);
-  };
+  const handleClick = (item: string) => {};
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
@@ -57,7 +55,7 @@ export default function Navbar() {
     <Box sx={{ display: "flex" }}>
       <AppBar
         component="nav"
-        position="sticky"
+        position="fixed"
         sx={{ backgroundColor: "#F0A04B" }}
       >
         <Toolbar>

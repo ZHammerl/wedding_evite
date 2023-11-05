@@ -14,6 +14,11 @@ export type Contact = {
   contactTwo?: string[];
 };
 
+
+export type MenuType = {
+  menuOne: string;
+  menuTwo: string;
+}
 export type LoginType = {
   email: string;
   password: string;
@@ -32,4 +37,5 @@ export type NotificationProps = {
   message: string;
   severity: AlertColor | undefined;
   handleClose: () => void;
+
 };
