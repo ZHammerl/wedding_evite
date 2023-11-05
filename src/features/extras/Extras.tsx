@@ -99,10 +99,10 @@ function Extras() {
     }
   };
 
-  const giftList = (list: []) => {
+  const giftList = (list: object[]) => {
     return (
       <List>
-        {list.map((item) => (
+        {list.map((item: object) => (
           <ListItem key={item._id}>
             <Typography variant="h5">{item.link}</Typography>
           </ListItem>
