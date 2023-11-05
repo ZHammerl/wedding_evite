@@ -10,6 +10,7 @@ export const rsvpContainer = {
 export const cardWrapper = {
   maxWidth: 600,
   display: "flex",
+  flexDirection: "row",
   justifyContent: "center",
   flexWrap: "wrap",
   gap: "2em",

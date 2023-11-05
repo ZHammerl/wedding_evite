@@ -8,7 +8,9 @@ import {
   Container,
   TextField,
   Modal,
+  Chip,
 } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2";
 import AddIcon from "@mui/icons-material/Add";
 import SendIcon from "@mui/icons-material/Send";
 import EditIcon from "@mui/icons-material/Edit";
@@ -17,12 +19,6 @@ import { GuestItem } from "../../interfaces/interfaces";
 import { GuestCards } from "./GuestCard";
 import { MenuType } from "@root/types/types";
 import * as styles from "./rsvp.style";
-
-export type AdditionalGuestName = {
-  name: string;
-  surname: string;
-  id: string;
-};
 
 function Rsvp() {
   const [text, setText] = useState<string>("");
@@ -89,7 +85,6 @@ function Rsvp() {
     };
     setOpen(true);
     setSent(true);
-    console.log(rsvpData);
     return rsvpData;
   };
 
@@ -97,17 +92,20 @@ function Rsvp() {
     <Card>
       <CardContent sx={styles.message}>
         <Typography>Mensaje</Typography>
-        <TextField
-          id="message-box"
-          placeholder="Aquí nos pueden dejar un mensaje..."
-          variant="filled"
-          value={text}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setText(event.target.value);
-          }}
-          multiline
-          rows={4}
-        />
+        <Box sx={{ pr: 5, pl: 5 }}>
+          <TextField
+            id="message-box"
+            placeholder="Aquí nos pueden dejar un mensaje..."
+            variant="filled"
+            value={text}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setText(event.target.value);
+            }}
+            multiline
+            fullWidth
+            rows={4}
+          />
+        </Box>
       </CardContent>
     </Card>
   );
@@ -133,18 +131,68 @@ function Rsvp() {
   );
 
   const GuestInfo = guestData.guests.map((guest) => {
-    const { _id: guestId, name, additionalGuest } = guest;
+    const { _id: guestId, name, menuChoice, status } = guest;
 
     return (
-      <Card key={guestId} variant="outlined">
-        <CardContent sx={styles.cardContent}>
-          {name != "" && (
-            <Box>
-              <Typography variant="h6">{name}</Typography>
-            </Box>
-          )}
-        </CardContent>
-      </Card>
+      <Grid>
+        <Card key={guestId} variant="outlined">
+          <CardContent sx={styles.cardContent}>
+            {name != "" && (
+              <Box>
+                <Typography variant="h6">{name}</Typography>
+              </Box>
+            )}
+            <Grid
+              container
+              direction="column"
+              alignItems="flex-start"
+              rowSpacing={1}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            >
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="center"
+              >
+                <Grid>
+                  <div>RSVP:</div>
+                </Grid>
+                <Grid>
+                  <Chip variant="outlined" label={status ? "si" : "no"} />
+                </Grid>
+              </Grid>
+
+              <Grid
+                container
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="center"
+              >
+                <Grid>
+                  <div>Menu:</div>
+                </Grid>
+                <Grid>
+                  <Chip variant="outlined" label={menuChoice} />
+                </Grid>
+              </Grid>
+            </Grid>
+            <Button sx={{ position: "relative" }}>
+              <EditIcon
+                sx={{
+                  position: "absolute",
+                  right: 0,
+                  "&:hover": {
+                    color: "black",
+                    cursor: "pointer",
+                  },
+                }}
+                onClick={() => setSent(false)}
+              />
+            </Button>
+          </CardContent>
+        </Card>
+      </Grid>
     );
   });
 
@@ -174,7 +222,16 @@ function Rsvp() {
           </Button>
         </>
       ) : (
-        GuestInfo
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          rowSpacing={1}
+          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        >
+          {GuestInfo}
+        </Grid>
       )}
 
       {successModal}
