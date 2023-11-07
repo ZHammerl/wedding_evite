@@ -1,5 +1,21 @@
 import React, { useState } from "react";
-import { Box, Stack, Typography } from "@mui/material";
+import {
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+  Typography,
+  Button,
+  Box,
+  Stack,
+  Container,
+  CardMedia,
+  Card,
+  Link,
+} from "@mui/material";
 import { Guest } from "@interfaces/interfaces";
 
 function GuestList() {
@@ -8,10 +24,11 @@ function GuestList() {
   const guestList: Guest[] = [
     { name: "jorge", surname: "rodriguez" },
     { name: "ziska", surname: "hammerl" },
+    { name: "jose", surname: "saavedra" },
   ];
 
   return (
-    <Box>
+    <Container>
       {guestList.map((guest) => (
         <Box key={guest.name}>
           <Typography>{guest.name}</Typography>
@@ -19,7 +36,7 @@ function GuestList() {
         </Box>
       ))}
       <Box>{guestList.length}</Box>
-    </Box>
+    </Container>
   );
 }
 

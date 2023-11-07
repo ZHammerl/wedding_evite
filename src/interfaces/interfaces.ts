@@ -11,33 +11,10 @@ export interface WeddingObjectProject {
   nameTwo: string;
   menu: MenuItems;
 }
-export interface ContactObject {
-  contactOne: string[];
-  contactTwo?: string[];
-}
-
-export interface Guest {
-  _id: string;
-  name: string;
-  surname: string;
-  status: Boolean;
-  menuChoice: string;
-  additionalGuest: boolean;
-}
 
 export interface GuestItem {
   _id: number | string;
   guests: Guest[];
-}
-
-export interface LocationObject {
-  id: string;
-  title: string;
-  image: string;
-  name: string;
-  date: string;
-  time: string;
-  address: string;
 }
 
 export interface WeddingHelper {
@@ -56,9 +33,40 @@ export interface Guest {
   surname?: string;
   menu: string;
   status: boolean;
+  additionalGuest: boolean;
 }
 
 export interface guestList {
   guestCount: number;
   guestList: Guest[];
+}
+
+export interface EventObject {
+  id?: string;
+  title?: string;
+  nameOne: string;
+  surnameOne: string;
+  nameTwo: string;
+  surnameTwo: string;
+  date: string;
+  contact: ContactObject[];
+  locations: LocationObject[];
+  message: string;
+}
+
+export interface ContactObject {
+  id?: string;
+  title: string;
+  name: string;
+  phone: string;
+  inChargeOf: string;
+}
+export interface LocationObject {
+  id?: string;
+  title: string;
+  image?: string;
+  name: string;
+  date: string;
+  time: string;
+  address: string;
 }
