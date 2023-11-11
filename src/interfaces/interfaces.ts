@@ -70,3 +70,31 @@ export interface LocationObject {
   time: string;
   address: string;
 }
+
+export interface ContactsFormProps {
+  contacts: ContactObject[];
+  onInputChange: (
+    e: React.ChangeEvent<HTMLInputElement> | HTMLTextAreaElement,
+    index: number,
+    fieldName: string
+  ) => void;
+  onRemoveField: (index: number) => void;
+  onAddField: () => void;
+}
+
+export interface LocationsFormProps {
+  locations: LocationObject[];
+  onInputChange: (
+    e: React.ChangeEvent<HTMLInputElement> | HTMLTextAreaElement,
+    index: number,
+    fieldName: string
+  ) => void;
+  onRemoveField: (index: number) => void;
+  onAddField: () => void;
+}
+
+export interface CouplesNameFormProps {
+  onInputChange: (
+    e: React.ChangeEvent<HTMLInputElement> | HTMLTextAreaElement
+  ) => void;
+}

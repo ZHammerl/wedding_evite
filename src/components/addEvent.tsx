@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import {
-  AppBar,
-  Drawer,
   Divider,
   IconButton,
   List,
@@ -23,13 +21,12 @@ import {
 } from "@mui/material";
 import { EventValidate } from "@helpers/validateForm";
 import { useNotification } from "@root/context/notification.context";
-import {
-  ContactObject,
-  EventObject,
-  LocationObject,
-} from "@interfaces/interfaces";
+import { EventObject } from "@interfaces/interfaces";
+import ContactsForm from "@components/contactsForm";
+import LocationsForm from "@components/locationsForm";
+import CouplesNamesForm from "@components/couplesNamesForm";
 
-function AddEvent() {
+const AddEvent: React.FC = () => {
   const [eventData, setEventData] = useState<EventObject>({
     title: "",
     nameOne: "",
@@ -41,16 +38,22 @@ function AddEvent() {
     locations: [{ title: "", name: "", date: "", time: "", address: "" }],
     message: "",
   });
-  // const [contacts, setContacts] = useState<ContactObject[{}]>([]);
-  // const [locations, setLocations] = useState<LocationObject[{}]>([]);
+
   const { getError, getSuccess } = useNotification();
 
-  const onChangeHandel = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChangeSimple = (
+    e: React.ChangeEvent<HTMLInputElement> | HTMLTextAreaElement
+  ) => {
     const { value, name } = e.target;
     setEventData({ ...eventData, [name]: value });
   };
 
-  const handleInputChange = (e, index, arrayName, fieldName) => {
+  const handleInputChange = (
+    e,
+    index: number,
+    arrayName: string,
+    fieldName: string
+  ) => {
     const { value } = e.target;
     const updatedArray = [...eventData[arrayName]];
     updatedArray[index][fieldName] = value;
@@ -73,7 +76,7 @@ function AddEvent() {
       });
   };
 
-  const handleRemoveField = (index: string, arrayName: string) => {
+  const handleRemoveField = (index: number, arrayName: string) => {
     const updateArray = [...eventData[arrayName]];
 
     updateArray.splice(index, 1);
@@ -94,157 +97,47 @@ function AddEvent() {
     <Container>
       <Card>
         <Typography variant="h4">Add your event</Typography>
-        <Typography variant="h5">Couple names</Typography>
-        <Box component="form" onSubmit={submitHandler}>
-          <Stack direction="row" spacing={2}>
-            <TextField
-              id="nameOne"
-              name="nameOne"
-              onChange={(e) => onChangeHandel(e)}
-              label="Name"
-            />
-            <TextField
-              id="surnameOne"
-              name="surnameOne"
-              onChange={(e) => onChangeHandel(e)}
-              label="Surname"
-            />
-          </Stack>
-          <Stack direction="row" spacing={2}>
-            <TextField
-              id="nameTwo"
-              name="nameTwo"
-              onChange={(e) => onChangeHandel(e)}
-              label="Name"
-            />
-            <TextField
-              id="surnameTwo"
-              name="surnameTwo"
-              onChange={(e) => onChangeHandel(e)}
-              label="Surname"
-            />
-          </Stack>
-          <Typography>Event details</Typography>
-          <Grid
-            container
-            direction="column"
-            alignContent="center"
-            justifyContent="center"
-          >
-            <Grid item>
-              <TextField
-                id="date"
-                name="date"
-                label="Date"
-                onChange={(e) => onChangeHandel(e)}
-              />
-              <TextField
-                id="time"
-                name="time"
-                label="Time"
-                onChange={(e) => onChangeHandel(e)}
-              />
-            </Grid>
-          </Grid>
-          <Typography>Contacts</Typography>
-          {eventData.contact.map((contact, index) => (
-            <Box key={index}>
-              <TextField
-                label="Title"
-                value={contact.title}
-                onChange={(e) =>
-                  handleInputChange(e, index, "contact", "title")
-                }
-              />
-              <TextField
-                label="Name"
-                value={contact.name}
-                onChange={(e) => handleInputChange(e, index, "contact", "name")}
-              />
-              <TextField
-                label="Phone"
-                value={contact.phone}
-                onChange={(e) =>
-                  handleInputChange(e, index, "contact", "phone")
-                }
-              />
-              <TextField
-                label="In charge of"
-                value={contact.inChargeOf}
-                onChange={(e) =>
-                  handleInputChange(e, index, "contact", "inChargeOf")
-                }
-              />
-              <Button
-                type="button"
-                variant="outlined"
-                onClick={() => handleRemoveField(index, "contact")}
-              >
-                Remove Contact
-              </Button>
-            </Box>
-          ))}
-          <Button type="button" onClick={() => handleAddField("contact")}>
-            Add Contact
-          </Button>
-
-          <Typography>Locations</Typography>
-          {eventData.locations.map((location, index) => (
-            <Box key={index}>
-              <TextField
-                label="Title"
-                value={location.title}
-                onChange={(e) =>
-                  handleInputChange(e, index, "locations", "title")
-                }
-              />
-              <TextField
-                label="Name"
-                value={location.name}
-                onChange={(e) =>
-                  handleInputChange(e, index, "locations", "name")
-                }
-              />
-              <TextField
-                label="Date"
-                value={location.date}
-                onChange={(e) =>
-                  handleInputChange(e, index, "locations", "date")
-                }
-              />
-              <TextField
-                label="Time"
-                value={location.time}
-                onChange={(e) =>
-                  handleInputChange(e, index, "locations", "time")
-                }
-              />
-              <TextField
-                label="Address"
-                value={location.address}
-                onChange={(e) =>
-                  handleInputChange(e, index, "locations", "address")
-                }
-              />
-              <Button
-                type="button"
-                variant="outlined"
-                onClick={() => handleRemoveField(index, "locations")}
-              >
-                Remove Location
-              </Button>
-            </Box>
-          ))}
-          <Button type="button" onClick={() => handleAddField("locations")}>
-            Add Location
-          </Button>
-          <Divider />
+        <Typography>Event details</Typography>
+        <Box>
           <Typography variant="h4">Give to your guest a message</Typography>
           <TextField
             label="message"
             name="message"
-            onChange={(e) => onChangeHandel(e)}
+            onChange={(e) => handleInputChangeSimple(e)}
           />
+          <TextField
+            id="date"
+            name="date"
+            label="Date"
+            onChange={(e) => handleInputChangeSimple(e)}
+          />
+        </Box>
+        <Typography variant="h4">Couple names</Typography>
+        <Box component="form" onSubmit={submitHandler}>
+          <CouplesNamesForm onInputChange={(e) => handleInputChangeSimple(e)} />
+
+          <Typography>Contacts</Typography>
+
+          <ContactsForm
+            contacts={eventData.contact}
+            onInputChange={(e, index, fieldName) =>
+              handleInputChange(e, index, "contact", fieldName)
+            }
+            onRemoveField={(index) => handleRemoveField(index, "contact")}
+            onAddField={() => handleAddField("contact")}
+          />
+          <Typography variant="h4">Locations</Typography>
+
+          <LocationsForm
+            locations={eventData.locations}
+            onInputChange={(e, index, fieldName) =>
+              handleInputChange(e, index, "locations", fieldName)
+            }
+            onRemoveField={(index) => handleRemoveField(index, "locations")}
+            onAddField={() => handleAddField("locations")}
+          />
+          <Divider />
+
           <Button type="submit" variant="contained">
             Submit
           </Button>
@@ -252,6 +145,6 @@ function AddEvent() {
       </Card>
     </Container>
   );
-}
+};
 
 export default AddEvent;

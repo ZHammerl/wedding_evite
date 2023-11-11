@@ -29,12 +29,12 @@ export const EventValidate = yup.object().shape({
   ),
   locations: yup.array().of(
     yup.object().shape({
-      title: yup.string().required("This field is required"),
-      name: yup.string().required("This field is required"),
+      title: yup.string().required("Title location is required"),
+      name: yup.string().required("Name location is required"),
       image: yup.string(),
-      date: yup.date().required("This field is required"),
-      time: yup.string().required("This field is required"),
-      address: yup.string().required("This field is required"),
+      date: yup.date().required("Date location is required"),
+      time: yup.string().required("Time location is required"),
+      address: yup.string().required("Address location is required"),
     })
   ),
   message: yup.string().required("Say something to your guests"),
