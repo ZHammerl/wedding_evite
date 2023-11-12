@@ -15,33 +15,40 @@ import AddIcon from "@mui/icons-material/Add";
 import SendIcon from "@mui/icons-material/Send";
 import EditIcon from "@mui/icons-material/Edit";
 import { v4 as uuid } from "uuid";
-import { GuestItem } from "../../interfaces/interfaces";
 import { GuestCards } from "./GuestCard";
 import { MenuType } from "@root/types/types";
 import * as styles from "./rsvp.style";
+import { guestsService } from "../../services/api/guests.service";
+import { useParams } from "react-router-dom";
+import { Guests, Guest } from "@interfaces/Guests";
 
 function Rsvp() {
   const [text, setText] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
   const [sent, setSent] = useState<boolean>(false);
-  const [guestData, setGuestData] = useState<GuestItem>({
+  const [errorMessages, setErrorMessages] = useState<string>("");
+  const [guestData, setGuestData] = useState<Guests>({
     _id: "",
+    extraGuestPermission: true,
+    isConfirmed: false,
+    message: "",
+    eventId: "1",
     guests: [
       {
         _id: "1",
-        name: "Jorge",
+        familyId: "1",
+        firstName: "Jorge",
         surname: "Rodriguez",
-        status: false,
-        menuChoice: "",
-        additionalGuest: false,
+        isConfirmed: false,
+        menu: [],
       },
       {
         _id: "2",
-        name: "Franziska",
+        familyId: "1",
+        firstName: "Franziska",
         surname: "Hammerl",
-        status: false,
-        menuChoice: "",
-        additionalGuest: false,
+        isConfirmed: false,
+        menu: [],
       },
     ],
   });
@@ -51,19 +58,41 @@ function Rsvp() {
     menuTwo: "con carne",
   };
 
+  const { eventId } = useParams<{ eventId: string }>();
+  const { familyId } = useParams<{ familyId: string }>();
+
+  useEffect(() => {
+    if (eventId === undefined || familyId === undefined) {
+      return setErrorMessages("No se ha encontrado el evento o la familia");
+    }
+
+    console.log(11.1, { eventId, familyId });
+    guestsService
+      .getGuestFamily(eventId, familyId)
+      .then((res: any) => {
+        setGuestData(res.data);
+      })
+      .catch((err: any) => console.log(err));
+  }, []);
+
+  if (eventId === undefined || familyId === undefined) {
+    return <div>{errorMessages}</div>;
+  }
+
   const addGuest = () => {
     setGuestData((prev) => {
       const updatedGuests = [
         ...prev.guests,
         {
           _id: uuid(),
-          name: "",
+          familyId: "1",
+          firstName: "",
           surname: "",
-          status: false,
-          menuChoice: "",
-          additionalGuest: true,
+          isConfirmed: false,
+          menu: [],
         },
       ];
+
       return { ...prev, guests: updatedGuests };
     });
   };
@@ -80,12 +109,16 @@ function Rsvp() {
 
   const handleSubmit = () => {
     const rsvpData = {
-      guests: guestData.guests,
+      ...guestData,
       message: text,
     };
-    setOpen(true);
-    setSent(true);
-    return rsvpData;
+    guestsService
+      .updateGuestFamily(eventId, rsvpData)
+      .then(() => {
+        setSent(true);
+        setOpen(true);
+      })
+      .catch((err: any) => console.log(err));
   };
 
   const messageFromGuest = (
@@ -131,15 +164,15 @@ function Rsvp() {
   );
 
   const GuestInfo = guestData.guests.map((guest) => {
-    const { _id: guestId, name, menuChoice, status } = guest;
+    const { _id: guestId, firstName, menu, isConfirmed } = guest;
 
     return (
       <Grid>
         <Card key={guestId} variant="outlined">
           <CardContent sx={styles.cardContent}>
-            {name != "" && (
+            {firstName != "" && (
               <Box>
-                <Typography variant="h6">{name}</Typography>
+                <Typography variant="h6">{firstName}</Typography>
               </Box>
             )}
             <Grid
@@ -159,7 +192,7 @@ function Rsvp() {
                   <div>RSVP:</div>
                 </Grid>
                 <Grid>
-                  <Chip variant="outlined" label={status ? "si" : "no"} />
+                  <Chip variant="outlined" label={isConfirmed ? "si" : "no"} />
                 </Grid>
               </Grid>
 
@@ -173,7 +206,7 @@ function Rsvp() {
                   <div>Menu:</div>
                 </Grid>
                 <Grid>
-                  <Chip variant="outlined" label={menuChoice} />
+                  <Chip variant="outlined" label={menu} />
                 </Grid>
               </Grid>
             </Grid>
