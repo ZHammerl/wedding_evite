@@ -14,13 +14,13 @@ import {
 import ClearIcon from "@mui/icons-material/Clear";
 import OptionToggleButton from "./optionToggleButton";
 import * as styles from "./rsvp.style";
-import { GuestItem } from "@interfaces/interfaces";
+import { Guests } from "@interfaces/Guests";
 import { MenuType } from "@root/types/types";
 
 type Props = {
-  guestData: GuestItem;
-  setGuestData: React.Dispatch<React.SetStateAction<GuestItem>>;
-  removeGuest: (id: string | number) => void;
+  guestData: Guests;
+  setGuestData: React.Dispatch<React.SetStateAction<Guests | undefined>>;
+  removeGuest: (id: string) => void;
   menu: MenuType;
 };
 export const GuestCards = ({
@@ -31,11 +31,16 @@ export const GuestCards = ({
 }: Props) => {
   const menuItems: string[] = Object.keys(menu);
 
+  if (!guestData || guestData.guests.length === 0) {
+    return <div>Loading...</div>;
+  }
+
+  console.log(13.1, { guestData });
   useEffect(() => {
     const updatedGuests = [...guestData.guests];
 
     updatedGuests.forEach((guest) => {
-      guest.menuChoice = menu[menuItems[0] as keyof MenuType];
+      guest.menuchoice = [menu[menuItems[0] as keyof MenuType]];
     });
 
     setGuestData({
@@ -67,28 +72,32 @@ export const GuestCards = ({
   return (
     <Container className="card-wrapper" sx={styles.cardWrapper}>
       {guestData.guests.map((guest) => {
-        const { _id: guestId, name, additionalGuest } = guest;
+        const { _id: guestId, firstName, additionalGuest } = guest;
+        console.log(13.2, { guest });
+        const capitalizedFirstName =
+          firstName.charAt(0).toUpperCase() + firstName.slice(1);
 
         return (
           <Card key={guestId} variant="outlined">
             <CardContent sx={styles.cardContent}>
-              {name != "" && additionalGuest === false ? (
+              {firstName !== "" &&
+              (additionalGuest === false || additionalGuest === undefined) ? (
                 <Box>
-                  <Typography variant="h6">{name}</Typography>
+                  <Typography variant="h6">{capitalizedFirstName}</Typography>
                 </Box>
               ) : (
                 <Box sx={{ position: "relative" }}>
-                    <ClearIcon
-                      sx={{
-                        position: "absolute",
-                        right: 0,
-                        "&:hover": {
-                          color: "red",
-                          cursor: "pointer",
-                        },
-                      }}
-                      onClick={() => removeGuest(guestId)}
-                    />
+                  <ClearIcon
+                    sx={{
+                      position: "absolute",
+                      right: 0,
+                      "&:hover": {
+                        color: "red",
+                        cursor: "pointer",
+                      },
+                    }}
+                    onClick={() => removeGuest(guestId)}
+                  />
                   <FormControl>
                     <TextField
                       id="name"

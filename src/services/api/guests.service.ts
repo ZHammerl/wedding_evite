@@ -8,7 +8,7 @@ class GuestsService {
     try {
       console.log(12, { eventId, familyId });
       const response = await axios.get(
-        `${this.BASE_URL}event/confirmation/${eventId}/${familyId}`
+        `${this.BASE_URL}api/v1/event/confirmation/${eventId}/${familyId}`
       );
       console.log(12.1, response.data);
       return response.data as Guests;
@@ -21,7 +21,7 @@ class GuestsService {
   async updateGuestFamily(eventId: string, guests: Guests): Promise<Guests> {
     try {
       const response = await axios.post(
-        `${this.BASE_URL}event/confirmation/${eventId}`,
+        `${this.BASE_URL}api/v1/event/confirmation/${eventId}`,
         guests
       );
       return response.data as Guests;

@@ -27,31 +27,7 @@ function Rsvp() {
   const [open, setOpen] = useState<boolean>(false);
   const [sent, setSent] = useState<boolean>(false);
   const [errorMessages, setErrorMessages] = useState<string>("");
-  const [guestData, setGuestData] = useState<Guests>({
-    _id: "",
-    extraGuestPermission: true,
-    isConfirmed: false,
-    message: "",
-    eventId: "1",
-    guests: [
-      {
-        _id: "1",
-        familyId: "1",
-        firstName: "Jorge",
-        surname: "Rodriguez",
-        isConfirmed: false,
-        menu: [],
-      },
-      {
-        _id: "2",
-        familyId: "1",
-        firstName: "Franziska",
-        surname: "Hammerl",
-        isConfirmed: false,
-        menu: [],
-      },
-    ],
-  });
+  const [guestData, setGuestData] = useState<Guests>();
 
   const menu: MenuType = {
     menuOne: "vegetariano",
@@ -61,49 +37,61 @@ function Rsvp() {
   const { eventId } = useParams<{ eventId: string }>();
   const { familyId } = useParams<{ familyId: string }>();
 
+  console.log(11, { eventId, familyId });
+
   useEffect(() => {
+    console.log(11.1, { eventId, familyId });
     if (eventId === undefined || familyId === undefined) {
       return setErrorMessages("No se ha encontrado el evento o la familia");
     }
 
-    console.log(11.1, { eventId, familyId });
     guestsService
       .getGuestFamily(eventId, familyId)
       .then((res: any) => {
-        setGuestData(res.data);
+        setGuestData(res.family);
       })
       .catch((err: any) => console.log(err));
-  }, []);
+  }, [eventId, familyId]);
 
-  if (eventId === undefined || familyId === undefined) {
+  console.log(11.3, { guestData });
+
+  if (
+    eventId === undefined ||
+    familyId === undefined ||
+    guestData === undefined
+  ) {
     return <div>{errorMessages}</div>;
   }
 
   const addGuest = () => {
-    setGuestData((prev) => {
-      const updatedGuests = [
-        ...prev.guests,
-        {
-          _id: uuid(),
-          familyId: "1",
-          firstName: "",
-          surname: "",
-          isConfirmed: false,
-          menu: [],
-        },
-      ];
-
-      return { ...prev, guests: updatedGuests };
+    setGuestData((prev: Guests | undefined) => {
+      if (prev === undefined) {
+        return undefined;
+      } else {
+        const updatedGuests = [
+          ...prev.guests,
+          {
+            _id: uuid(),
+            familyId: familyId,
+            firstName: "",
+            surname: "",
+            isConfirmed: false,
+            menuchoice: [],
+          },
+        ];
+        return { ...prev, guests: updatedGuests };
+      }
     });
   };
 
   const removeGuest = (id: string | number) => {
-    setGuestData((prev) => {
-      const updatedGuests = [
-        ...prev.guests.filter((guest) => guest._id !== id),
-      ];
-
-      return { ...prev, guests: updatedGuests };
+    setGuestData((prev: Guests | undefined) => {
+      if (prev === undefined) {
+        return undefined;
+      } else {
+        const updatedGuests = prev.guests.filter((guest) => guest._id !== id);
+        return { ...prev, guests: updatedGuests };
+      }
     });
   };
 
@@ -163,69 +151,73 @@ function Rsvp() {
     </Modal>
   );
 
-  const GuestInfo = guestData.guests.map((guest) => {
-    const { _id: guestId, firstName, menu, isConfirmed } = guest;
+  const GuestInfo = guestData.guests.map((guest, i) => {
+    console.log(11.5, { guestData, guest });
+    const { firstName, isConfirmed, menuchoice } = guest;
+
+    console.log(11.4, { sent });
 
     return (
-      <Grid>
-        <Card key={guestId} variant="outlined">
-          <CardContent sx={styles.cardContent}>
-            {firstName != "" && (
-              <Box>
-                <Typography variant="h6">{firstName}</Typography>
-              </Box>
-            )}
-            <Grid
-              container
-              direction="column"
-              alignItems="flex-start"
-              rowSpacing={1}
-              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-            >
-              <Grid
-                container
-                direction="row"
-                justifyContent="flex-start"
-                alignItems="center"
-              >
-                <Grid>
-                  <div>RSVP:</div>
-                </Grid>
-                <Grid>
-                  <Chip variant="outlined" label={isConfirmed ? "si" : "no"} />
-                </Grid>
-              </Grid>
+      <div>Hello</div>
+      // <Grid>
+      //   <Card key={i} variant="outlined">
+      //     <CardContent sx={styles.cardContent}>
+      //       {firstName !== "" && (
+      //         <Box>
+      //           <Typography variant="h6">{firstName}</Typography>
+      //         </Box>
+      //       )}
+      //       <Grid
+      //         container
+      //         direction="column"
+      //         alignItems="flex-start"
+      //         rowSpacing={1}
+      //         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+      //       >
+      //         <Grid
+      //           container
+      //           direction="row"
+      //           justifyContent="flex-start"
+      //           alignItems="center"
+      //         >
+      //           <Grid>
+      //             <div>RSVP:</div>
+      //           </Grid>
+      //           <Grid>
+      //             <Chip variant="outlined" label={isConfirmed ? "si" : "no"} />
+      //           </Grid>
+      //         </Grid>
 
-              <Grid
-                container
-                direction="row"
-                justifyContent="flex-start"
-                alignItems="center"
-              >
-                <Grid>
-                  <div>Menu:</div>
-                </Grid>
-                <Grid>
-                  <Chip variant="outlined" label={menu} />
-                </Grid>
-              </Grid>
-            </Grid>
-            <Button sx={{ position: "relative" }}>
-              <EditIcon
-                sx={{
-                  position: "absolute",
-                  right: 0,
-                  "&:hover": {
-                    color: "black",
-                    cursor: "pointer",
-                  },
-                }}
-                onClick={() => setSent(false)}
-              />
-            </Button>
-          </CardContent>
-        </Card>
-      </Grid>
+      //         <Grid
+      //           container
+      //           direction="row"
+      //           justifyContent="flex-start"
+      //           alignItems="center"
+      //         >
+      //           <Grid>
+      //             <div>Menu:</div>
+      //           </Grid>
+      //           <Grid>
+      //             <Chip variant="outlined" label={menuchoice} />
+      //           </Grid>
+      //         </Grid>
+      //       </Grid>
+      //       <Button sx={{ position: "relative" }}>
+      //         <EditIcon
+      //           sx={{
+      //             position: "absolute",
+      //             right: 0,
+      //             "&:hover": {
+      //               color: "black",
+      //               cursor: "pointer",
+      //             },
+      //           }}
+      //           onClick={() => setSent(false)}
+      //         />
+      //       </Button>
+      //     </CardContent>
+      //   </Card>
+      // </Grid>
     );
   });
 

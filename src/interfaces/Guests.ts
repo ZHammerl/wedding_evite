@@ -8,12 +8,12 @@ export interface Guests {
 }
 
 export interface Guest {
-  _id?: string ;
+  _id: string;
   familyId: string;
   firstName: string;
   surname: string;
   email?: string;
   isConfirmed: boolean;
-  menu: string[];
-
+  menuchoice: string[];
+  additionalGuest?: boolean
 }

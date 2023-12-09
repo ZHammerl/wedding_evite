@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, ToggleButton, ToggleButtonGroup, styled } from "@mui/material";
-import { GuestItem } from "@interfaces/interfaces";
+import { Guests } from "@interfaces/Guests";
 
 const SiToggleButton = styled(ToggleButton)(({ theme }) => ({
   color: "black",
@@ -27,8 +27,8 @@ const OptionButtonGroup = styled(ToggleButtonGroup)(() => ({
 }));
 
 type Props = {
-  guestData: GuestItem;
-  setGuestData: React.Dispatch<React.SetStateAction<GuestItem>>;
+  guestData: Guests;
+  setGuestData: React.Dispatch<React.SetStateAction<Guests | undefined>>;
   guestId: string;
 };
 export default function OptionToggleButton({
@@ -37,6 +37,10 @@ export default function OptionToggleButton({
   setGuestData,
 }: Props) {
   const [userOption, setUserOption] = useState<boolean>();
+
+  if (!guestData || guestData.guests.length === 0) {
+    return <div>Loading...</div>;
+  }
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,
