@@ -14,6 +14,6 @@ export interface Guest {
   surname: string;
   email?: string;
   isConfirmed: boolean;
-  menuchoice: string[];
+  menuchoice: string;
   additionalGuest?: boolean
 }

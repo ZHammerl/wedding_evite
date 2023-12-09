@@ -21,33 +21,17 @@ type Props = {
   guestData: Guests;
   setGuestData: React.Dispatch<React.SetStateAction<Guests | undefined>>;
   removeGuest: (id: string) => void;
-  menu: MenuType;
+  menuItems: string[];
 };
 export const GuestCards = ({
   guestData,
   setGuestData,
   removeGuest,
-  menu,
+  menuItems,
 }: Props) => {
-  const menuItems: string[] = Object.keys(menu);
-
   if (!guestData || guestData.guests.length === 0) {
     return <div>Loading...</div>;
   }
-
-  console.log(13.1, { guestData });
-  useEffect(() => {
-    const updatedGuests = [...guestData.guests];
-
-    updatedGuests.forEach((guest) => {
-      guest.menuchoice = [menu[menuItems[0] as keyof MenuType]];
-    });
-
-    setGuestData({
-      ...guestData,
-      guests: updatedGuests,
-    });
-  }, []);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -80,8 +64,7 @@ export const GuestCards = ({
         return (
           <Card key={guestId} variant="outlined">
             <CardContent sx={styles.cardContent}>
-              {firstName !== "" &&
-              (additionalGuest === false || additionalGuest === undefined) ? (
+              {additionalGuest === false || additionalGuest === undefined ? (
                 <Box>
                   <Typography variant="h6">{capitalizedFirstName}</Typography>
                 </Box>
@@ -100,9 +83,9 @@ export const GuestCards = ({
                   />
                   <FormControl>
                     <TextField
-                      id="name"
+                      id="firstName"
                       label="Nombre"
-                      name="name"
+                      name="firstName"
                       required
                       variant="standard"
                       onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -136,17 +119,17 @@ export const GuestCards = ({
                 <Typography variant="body1">¿Qué menú prefieres?</Typography>
                 <RadioGroup
                   aria-labelledby="menu-selection"
-                  name="menuChoice"
+                  name="menuchoice"
                   onChange={(event) => handleChange(event, guestId)}
-                  defaultValue={menu[menuItems[0] as keyof MenuType]}
+                  defaultValue={menuItems[0]}
                 >
-                  {menuItems.map((key, i) => {
+                  {menuItems.map((item, i) => {
                     return (
                       <FormControlLabel
                         key={i}
-                        value={menu[key as keyof MenuType]}
+                        value={item}
                         control={<Radio />}
-                        label={menu[key as keyof MenuType]}
+                        label={item}
                       />
                     );
                   })}

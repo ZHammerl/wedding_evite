@@ -22,6 +22,11 @@ import { guestsService } from "../../services/api/guests.service";
 import { useParams } from "react-router-dom";
 import { Guests, Guest } from "@interfaces/Guests";
 
+const menu: MenuType = {
+  menuOne: "vegetariano",
+  menuTwo: "con carne",
+};
+
 function Rsvp() {
   const [text, setText] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
@@ -29,15 +34,19 @@ function Rsvp() {
   const [errorMessages, setErrorMessages] = useState<string>("");
   const [guestData, setGuestData] = useState<Guests>();
 
-  const menu: MenuType = {
-    menuOne: "vegetariano",
-    menuTwo: "con carne",
-  };
+  const menuItems: string[] = Object.values(menu);
 
   const { eventId } = useParams<{ eventId: string }>();
   const { familyId } = useParams<{ familyId: string }>();
 
   console.log(11, { eventId, familyId });
+
+  useEffect(() => {
+    console.log(13.1, { guestData });
+    if (guestData) {
+      console.log(13.12, { guestData });
+    }
+  }, []);
 
   useEffect(() => {
     console.log(11.1, { eventId, familyId });
@@ -48,7 +57,17 @@ function Rsvp() {
     guestsService
       .getGuestFamily(eventId, familyId)
       .then((res: any) => {
-        setGuestData(res.family);
+        const family = res.family;
+        const updatedGuests = [...family.guests];
+
+        updatedGuests.forEach((guest) => {
+          guest.menuchoice = menuItems[0];
+        });
+
+        setGuestData({
+          ...family,
+          guests: updatedGuests,
+        });
       })
       .catch((err: any) => console.log(err));
   }, [eventId, familyId]);
@@ -76,9 +95,11 @@ function Rsvp() {
             firstName: "",
             surname: "",
             isConfirmed: false,
-            menuchoice: [],
+            menuchoice: menuItems[0],
+            additionalGuest: true,
           },
         ];
+        console.log("updatedGuests:", { updatedGuests });
         return { ...prev, guests: updatedGuests };
       }
     });
@@ -231,7 +252,7 @@ function Rsvp() {
               guestData={guestData}
               setGuestData={setGuestData}
               removeGuest={removeGuest}
-              menu={menu}
+              menuItems={menuItems}
             />
           </Container>
           <Button variant="outlined" startIcon={<AddIcon />} onClick={addGuest}>

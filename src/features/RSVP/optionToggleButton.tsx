@@ -51,7 +51,7 @@ export default function OptionToggleButton({
       if (guest._id === guestId) {
         return {
           ...guest,
-          status: newOption,
+          isConfirmed: newOption,
         };
       }
       return guest;

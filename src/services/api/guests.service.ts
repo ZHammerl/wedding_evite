@@ -20,6 +20,8 @@ class GuestsService {
 
   async updateGuestFamily(eventId: string, guests: Guests): Promise<Guests> {
     try {
+      console.log(17, { eventId, guests });
+
       const response = await axios.post(
         `${this.BASE_URL}api/v1/event/confirmation/${eventId}`,
         guests
