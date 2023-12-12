@@ -28,7 +28,8 @@ const CouplesNamesForm: React.FC<CouplesNameFormProps> = ({
   onInputChange,
 }) => {
   return (
-    <Box>
+    <Stack gap={2}>
+      <Typography variant="h4">Couple names</Typography>
       <Stack direction="row" spacing={2}>
         <TextField
           id="nameOne"
@@ -57,7 +58,7 @@ const CouplesNamesForm: React.FC<CouplesNameFormProps> = ({
           label="Surname"
         />
       </Stack>
-    </Box>
+    </Stack>
   );
 };
 export default CouplesNamesForm;

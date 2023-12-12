@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -8,16 +8,18 @@ import {
   Grid,
   Paper,
 } from "@mui/material";
-import { LoginType } from "@root/types/types";
 import { useNotification } from "@root/context/notification.context";
 import { LoginValidate } from "@helpers/validateForm";
 import { useNavigate } from "react-router-dom";
+import { loginService } from "@root/services/api/login.service";
+import { LoginProps } from "@interfaces/interfaces";
 
 const Login = () => {
-  const [loginData, setLoginData] = useState<LoginType>({
+  const [loginData, setLoginData] = useState<LoginProps>({
     email: "",
     password: "",
   });
+
   const navigate = useNavigate();
 
   const { getError, getSuccess } = useNotification();
@@ -31,6 +33,9 @@ const Login = () => {
     LoginValidate.validate(loginData)
       .then(() => {
         getSuccess(JSON.stringify(loginData));
+        loginService.login(loginData);
+        //guardar la respuesta y pasarla a admin page
+        navigate("/admin");
       })
       .catch((error) => {
         getError(error.message);

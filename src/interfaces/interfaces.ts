@@ -52,6 +52,20 @@ export interface EventObject {
   contact: ContactObject[];
   locations: LocationObject[];
   message: string;
+  menus: MenuObject;
+  wishList: WishListObject[];
+  dressCode: string;
+  childPolicy: boolean;
+}
+export interface WishListObject {
+  store: string;
+  link: string;
+}
+
+export interface MenuObject {
+  with_meat: boolean;
+  vegetarian: boolean;
+  vegan: boolean;
 }
 
 export interface ContactObject {
@@ -82,10 +96,10 @@ export interface ContactsFormProps {
   onAddField: () => void;
 }
 
-export interface LocationsFormProps {
-  locations: LocationObject[];
+export interface ObjectArrayFormProps {
+  list: LocationObject[] | WishListObject[];
   onInputChange: (
-    e: React.ChangeEvent<HTMLInputElement> | HTMLTextAreaElement,
+    e: (event: React.ChangeEvent<HTMLInputElement>) => void,
     index: number,
     fieldName: string
   ) => void;
@@ -97,4 +111,15 @@ export interface CouplesNameFormProps {
   onInputChange: (
     e: React.ChangeEvent<HTMLInputElement> | HTMLTextAreaElement
   ) => void;
+}
+
+export interface DressCodeFormProps {
+  onInputChange: (
+    e: React.ChangeEvent<HTMLInputElement> | HTMLTextAreaElement
+  ) => void;
+}
+
+export interface LoginProps {
+  email: string;
+  password: string;
 }

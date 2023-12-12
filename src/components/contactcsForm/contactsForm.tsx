@@ -22,56 +22,57 @@ import {
   Grid,
 } from "@mui/material";
 
-import { LocationsFormProps } from "@interfaces/interfaces";
+import { ObjectArrayFormProps } from "@interfaces/interfaces";
 
-const LocationsForm: React.FC<LocationsFormProps> = ({
+const ContactsForm: React.FC<ObjectArrayFormProps> = ({
   onInputChange,
   onRemoveField,
   onAddField,
-  locations,
+  list,
 }) => {
   return (
-    <Box>
-      {locations.map((location, index) => (
-        <Box key={index}>
+    <Stack spacing={2}>
+      <Typography variant="h4">Contacts</Typography>
+      {list.map((contact, index) => (
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          flexWrap="wrap"
+          gap={2}
+          key={index}
+        >
           <TextField
             label="Title"
-            value={location.title}
+            value={contact.title}
             onChange={(e) => onInputChange(e, index, "title")}
           />
           <TextField
             label="Name"
-            value={location.name}
+            value={contact.name}
             onChange={(e) => onInputChange(e, index, "name")}
           />
           <TextField
-            label="Date"
-            value={location.date}
-            onChange={(e) => onInputChange(e, index, "date")}
+            label="Phone"
+            value={contact.phone}
+            onChange={(e) => onInputChange(e, index, "phone")}
           />
           <TextField
-            label="Time"
-            value={location.time}
-            onChange={(e) => onInputChange(e, index, "time")}
-          />
-          <TextField
-            label="Address"
-            value={location.address}
-            onChange={(e) => onInputChange(e, index, "address")}
+            label="In charge of"
+            value={contact.inChargeOf}
+            onChange={(e) => onInputChange(e, index, "inChargeOf")}
           />
           <Button
             type="button"
             variant="outlined"
             onClick={() => onRemoveField(index)}
           >
-            Remove Location
+            Remove Contact
           </Button>
-        </Box>
+        </Stack>
       ))}
       <Button type="button" onClick={() => onAddField()}>
-        Add Location
+        Add Contact
       </Button>
-    </Box>
+    </Stack>
   );
 };
-export default LocationsForm;
+export default ContactsForm;

@@ -8,4 +8,8 @@ export class Helpers {
   static getInitials(names: string[]): string {
     return names.map((name) => name[0].toUpperCase()).join("&");
   }
+  static camelCase(item: string): string {
+    const initial = item.slice(0, 1).toUpperCase();
+    return initial + item.slice(1).split("_").join(" ");
+  }
 }
