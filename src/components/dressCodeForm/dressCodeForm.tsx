@@ -48,9 +48,9 @@ const DressCodeForm: React.FC<DressCodeFormProps> = ({ onInputChange }) => {
   };
 
   return (
-    <Stack gap={2}>
-      <Stack gap={2} direction={"row"}>
-        <Typography variant="h4">Dress code</Typography>
+    <Stack gap={2} direction="column">
+      <Typography variant="h4">Dress code</Typography>
+      <Stack gap={2} direction="row">
         <InputLabel id="dressCode">Select</InputLabel>
         <FormControl variant="standard" required>
           <Select

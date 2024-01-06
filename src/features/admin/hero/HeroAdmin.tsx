@@ -22,9 +22,9 @@ const HeroAdmin = () => {
   const [currentUser, setCurrentUser] = useState("blanca");
 
   return (
-    <Container sx={styles.heroContainer}>
+    <Box sx={styles.heroContainer}>
       <Typography>Wellcome {currentUser}</Typography>
-    </Container>
+    </Box>
   );
 };
 

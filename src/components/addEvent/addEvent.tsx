@@ -106,89 +106,83 @@ const AddEvent: React.FC = () => {
   };
 
   return (
-    <Container>
-      <Box component="form" onSubmit={submitHandler}>
-        <Card sx={styles.cardContainer}>
-          <Typography variant="h3">Add your event</Typography>
-          <Typography>Wedding details</Typography>
+    <Box component="form" onSubmit={submitHandler}>
+      <Card sx={styles.cardContainer}>
+        <Typography variant="h3">Add your event</Typography>
+        <Typography>Wedding details</Typography>
 
-          <Box sx={styles.section}>
-            <Typography variant="h4" sx={styles.subtitle}>
-              Give to your guest a message
-            </Typography>
-            <Stack direction="row" gap={2}>
-              <TextField
-                label="Save the date message"
-                name="message"
-                onChange={(e) => handleInputChangeSimple(e)}
-              />
-              <TextField
-                id="date"
-                name="date"
-                label="Date of big day"
-                onChange={(e) => handleInputChangeSimple(e)}
-              />
-            </Stack>
-          </Box>
-          <Box sx={styles.section}>
-            <CouplesNamesForm
-              onInputChange={(e) => handleInputChangeSimple(e)}
+        <Box sx={styles.section}>
+          <Typography variant="h4" sx={styles.subtitle}>
+            Give to your guest a message
+          </Typography>
+          <Stack direction="row" gap={2}>
+            <TextField
+              label="Save the date message"
+              name="message"
+              onChange={(e) => handleInputChangeSimple(e)}
             />
-          </Box>
+            <TextField
+              id="date"
+              name="date"
+              label="Date of big day"
+              onChange={(e) => handleInputChangeSimple(e)}
+            />
+          </Stack>
+        </Box>
+        <Box sx={styles.section}>
+          <CouplesNamesForm onInputChange={(e) => handleInputChangeSimple(e)} />
+        </Box>
 
-          <Box sx={styles.section}>
-            <ContactsForm
-              list={eventData.contact}
-              onInputChange={(e, index, fieldName) =>
-                handleInputChange(e, index, "contact", fieldName)
-              }
-              onRemoveField={(index) => handleRemoveField(index, "contact")}
-              onAddField={() => handleAddField("contact")}
-            />
-          </Box>
+        <Box sx={styles.section}>
+          <ContactsForm
+            list={eventData.contact}
+            onInputChange={(e, index, fieldName) =>
+              handleInputChange(e, index, "contact", fieldName)
+            }
+            onRemoveField={(index) => handleRemoveField(index, "contact")}
+            onAddField={() => handleAddField("contact")}
+          />
+        </Box>
 
-          <Box sx={styles.section}>
-            <LocationsForm
-              list={eventData.locations}
-              onInputChange={(e, index, fieldName) =>
-                handleInputChange(e, index, "locations", fieldName)
-              }
-              onRemoveField={(index) => handleRemoveField(index, "locations")}
-              onAddField={() => handleAddField("locations")}
-            />
-          </Box>
-          <Box sx={styles.section}>
-            <DressCodeForm onInputChange={(e) => handleInputChangeSimple(e)} />
-          </Box>
-          <Box sx={styles.section}>
-            <ChildPolicyForm
-              onInputChange={(e) => handleInputChangeSimple(e)}
-            />
-          </Box>
-          <Box sx={styles.section}>
-            <MenuOptions
-              menuOptions={eventData.menus}
-              onInputChange={(e) => handleInputChangeSimple(e)}
-            />
-          </Box>
-          <Box sx={styles.section}>
-            <WishList
-              onInputChange={(e, index, fieldName) =>
-                handleInputChange(e, index, "wishList", fieldName)
-              }
-              onRemoveField={(index) => handleRemoveField(index, "wishList")}
-              onAddField={() => handleAddField("wishList")}
-              list={eventData.wishList}
-            />
-          </Box>
-          <Divider />
+        <Box sx={styles.section}>
+          <LocationsForm
+            list={eventData.locations}
+            onInputChange={(e, index, fieldName) =>
+              handleInputChange(e, index, "locations", fieldName)
+            }
+            onRemoveField={(index) => handleRemoveField(index, "locations")}
+            onAddField={() => handleAddField("locations")}
+          />
+        </Box>
+        <Box sx={styles.section}>
+          <DressCodeForm onInputChange={(e) => handleInputChangeSimple(e)} />
+        </Box>
+        <Box sx={styles.section}>
+          <ChildPolicyForm onInputChange={(e) => handleInputChangeSimple(e)} />
+        </Box>
+        <Box sx={styles.section}>
+          <MenuOptions
+            menuOptions={eventData.menus}
+            onInputChange={(e) => handleInputChangeSimple(e)}
+          />
+        </Box>
+        <Box sx={styles.section}>
+          <WishList
+            onInputChange={(e, index, fieldName) =>
+              handleInputChange(e, index, "wishList", fieldName)
+            }
+            onRemoveField={(index) => handleRemoveField(index, "wishList")}
+            onAddField={() => handleAddField("wishList")}
+            list={eventData.wishList}
+          />
+        </Box>
+        <Divider />
 
-          <Button type="submit" variant="contained">
-            Submit
-          </Button>
-        </Card>
-      </Box>
-    </Container>
+        <Button type="submit" variant="contained">
+          Submit
+        </Button>
+      </Card>
+    </Box>
   );
 };
 

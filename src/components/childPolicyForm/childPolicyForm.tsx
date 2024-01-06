@@ -50,8 +50,8 @@ const ChildPolicyForm: React.FC<DressCodeFormProps> = ({ onInputChange }) => {
 
   return (
     <Stack gap={2}>
+      <Typography variant="h4">Child policy</Typography>
       <Stack gap={2} direction={"row"}>
-        <Typography variant="h4">Child policy</Typography>
         <InputLabel id="dressCode">Select</InputLabel>
         <FormControl variant="standard" required>
           <Select

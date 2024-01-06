@@ -21,9 +21,10 @@ import {
   TextField,
   Grid,
 } from "@mui/material";
-
+import RemoveCircleOutlinedIcon from "@mui/icons-material/RemoveCircleOutlined";
+import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import { ObjectArrayFormProps } from "@interfaces/interfaces";
-
+import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 const ContactsForm: React.FC<ObjectArrayFormProps> = ({
   onInputChange,
   onRemoveField,
@@ -31,7 +32,7 @@ const ContactsForm: React.FC<ObjectArrayFormProps> = ({
   list,
 }) => {
   return (
-    <Stack spacing={2}>
+    <Stack spacing={2} direction="column">
       <Typography variant="h4">Contacts</Typography>
       {list.map((contact, index) => (
         <Stack
@@ -65,12 +66,13 @@ const ContactsForm: React.FC<ObjectArrayFormProps> = ({
             variant="outlined"
             onClick={() => onRemoveField(index)}
           >
-            Remove Contact
+            <DeleteForeverRoundedIcon />
           </Button>
         </Stack>
       ))}
       <Button type="button" onClick={() => onAddField()}>
-        Add Contact
+        <AddCircleOutlinedIcon />
+        {"Add contact "}
       </Button>
     </Stack>
   );
