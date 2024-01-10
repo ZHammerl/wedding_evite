@@ -34,6 +34,17 @@ class EventService {
       throw e;
     }
   }
+  async getEvent(userId: string) {
+    try {
+      const response = await axios.get(`${this.BASE_URL}/event/${userId}`);
+
+      return response.data;
+    } catch (error) {
+      console.log(userId);
+      console.error("error getEvent", error);
+      throw error;
+    }
+  }
 }
 
 export const eventService = new EventService();

@@ -23,7 +23,8 @@ import {
 } from "@mui/material";
 
 import { ObjectArrayFormProps } from "@interfaces/interfaces";
-
+import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
+import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 const LocationsForm: React.FC<ObjectArrayFormProps> = ({
   onInputChange,
   onRemoveField,
@@ -70,7 +71,7 @@ const LocationsForm: React.FC<ObjectArrayFormProps> = ({
             variant="outlined"
             onClick={() => onRemoveField(index)}
           >
-            Remove Location
+            <DeleteForeverRoundedIcon />{" "}
           </Button>
         </Stack>
       ))}
@@ -80,7 +81,8 @@ const LocationsForm: React.FC<ObjectArrayFormProps> = ({
         variant="outlined"
         onClick={() => onAddField()}
       >
-        Add Location
+        <AddCircleOutlinedIcon />
+        {"Add contact "}
       </Button>
     </Stack>
   );

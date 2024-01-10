@@ -13,14 +13,15 @@ import { LoginValidate } from "@helpers/validateForm";
 import { useNavigate } from "react-router-dom";
 import { loginService } from "@root/services/api/login.service";
 import { LoginProps } from "@interfaces/interfaces";
+import { useAuth } from "@root/context/auth.context";
 
 const Login = () => {
   const [loginData, setLoginData] = useState<LoginProps>({
     email: "",
     password: "",
   });
-
   const navigate = useNavigate();
+  const { setLoginResponse } = useAuth();
 
   const { getError, getSuccess } = useNotification();
 
@@ -28,18 +29,23 @@ const Login = () => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
-  const submitHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const submitHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    LoginValidate.validate(loginData)
-      .then(() => {
-        getSuccess(JSON.stringify(loginData));
-        loginService.login(loginData);
-        //guardar la respuesta y pasarla a admin page
+    // console.log(loginData);
+    try {
+      await LoginValidate.validate(loginData);
+      const loginResult = await loginService.login(loginData);
+      setLoginResponse(loginResult);
+
+      if (loginResult) {
         navigate("/admin");
-      })
-      .catch((error) => {
-        getError(error.message);
-      });
+        getSuccess(JSON.stringify(loginData));
+      } else {
+        getError("Error en el inicio de secion: " + loginResult);
+      }
+    } catch (error) {
+      getError(error.message);
+    }
   };
 
   return (

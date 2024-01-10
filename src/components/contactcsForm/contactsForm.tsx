@@ -21,9 +21,9 @@ import {
   TextField,
   Grid,
 } from "@mui/material";
-import RemoveCircleOutlinedIcon from "@mui/icons-material/RemoveCircleOutlined";
-import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
+
 import { ObjectArrayFormProps } from "@interfaces/interfaces";
+import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 const ContactsForm: React.FC<ObjectArrayFormProps> = ({
   onInputChange,

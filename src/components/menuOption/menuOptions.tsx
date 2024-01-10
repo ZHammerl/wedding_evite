@@ -62,7 +62,7 @@ const MenuOptions: React.FC<MenuObject> = ({ onInputChange }) => {
       <Typography>
         {"Select what kind of menu will you offer to your guests"}
       </Typography>
-      <FormGroup>
+      <Stack direction={{ xs: "column", sm: "row" }}>
         <FormControlLabel
           control={
             <Checkbox
@@ -89,7 +89,7 @@ const MenuOptions: React.FC<MenuObject> = ({ onInputChange }) => {
           }
           label={Helpers.camelCase("vegan")}
         />
-      </FormGroup>
+      </Stack>
     </Stack>
   );
 };

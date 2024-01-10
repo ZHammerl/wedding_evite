@@ -17,13 +17,17 @@ import {
   Link,
 } from "@mui/material";
 import * as styles from "@admin/hero/heroAdmin.style";
+import { useAuth } from "@root/context/auth.context";
 
 const HeroAdmin = () => {
-  const [currentUser, setCurrentUser] = useState("blanca");
+  const { loginResult } = useAuth();
+  const { user } = loginResult;
+
+  console.log(loginResult);
 
   return (
     <Box sx={styles.heroContainer}>
-      <Typography>Wellcome {currentUser}</Typography>
+      <Typography>Wellcome {user.username}</Typography>
     </Box>
   );
 };

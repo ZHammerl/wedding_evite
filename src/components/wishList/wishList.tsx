@@ -20,6 +20,8 @@ import {
   Grid,
   SelectChangeEvent,
 } from "@mui/material";
+import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
+import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import { ObjectArrayFormProps } from "@interfaces/interfaces";
 
 const WishList: React.FC<ObjectArrayFormProps> = ({
@@ -54,7 +56,7 @@ const WishList: React.FC<ObjectArrayFormProps> = ({
             variant="outlined"
             onClick={() => onRemoveField(index)}
           >
-            Remove item
+            <DeleteForeverRoundedIcon />
           </Button>
         </Stack>
       ))}
@@ -64,7 +66,8 @@ const WishList: React.FC<ObjectArrayFormProps> = ({
         variant="outlined"
         onClick={() => onAddField()}
       >
-        Add Item
+        <AddCircleOutlinedIcon />
+        {"Add contact "}
       </Button>
     </Box>
   );

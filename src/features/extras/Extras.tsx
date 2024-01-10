@@ -19,17 +19,21 @@ import {
   Link,
 } from "@mui/material";
 import * as styles from "./extras.styles";
+import { useAuth } from "@root/context/auth.context";
 
 function Extras() {
+  const { currentData } = useAuth();
+  const { gifts, dressCode, childPolicy } = currentData;
+  console.log(gifts, dressCode, childPolicy);
   const data = {
     gifts: ["liverpool link", "amazon wishlist"],
     dressCode: "playero", //casual, formal, playero
     childPolicy: false,
   };
 
-  const dressCode = (data: string) => {
+  const getDressCode = (data: string) => {
     switch (data) {
-      case "formal":
+      case "Formal":
         return (
           <Box>
             <Typography>fromal</Typography>
@@ -41,7 +45,7 @@ function Extras() {
             />
           </Box>
         );
-      case "casual":
+      case "Casual":
         return (
           <Box>
             <Typography>casual</Typography>
@@ -53,7 +57,7 @@ function Extras() {
             />
           </Box>
         );
-      case "playero":
+      case "Playero":
         return (
           <Box>
             <Typography>playero</Typography>
@@ -68,7 +72,7 @@ function Extras() {
     }
   };
 
-  const childPolicy = (value: boolean) => {
+  const getChildPolicy = (value: boolean) => {
     if (value === true) {
       return (
         <Box>
@@ -96,11 +100,13 @@ function Extras() {
     }
   };
 
-  const giftList = (list: string[]) => {
+  const getGiftList = (list: string[]) => {
     return (
       <List>
-        {list.map((item) => (
-          <ListItem sx={styles.listItem}>{item}</ListItem>
+        {list.map((item, index) => (
+          <ListItem key={index} sx={styles.listItem}>
+            {item}
+          </ListItem>
         ))}
       </List>
     );
@@ -114,7 +120,7 @@ function Extras() {
       >
         <Box sx={styles.card}>
           <Typography variant="h5">Gifts</Typography>
-          <Box>{giftList(data.gifts)}</Box>
+          <Box>{getGiftList(gifts)}</Box>
         </Box>
         <Stack
           direction={"row"}
@@ -122,11 +128,11 @@ function Extras() {
         >
           <Box sx={styles.card}>
             <Typography variant="h5">Dress Code</Typography>
-            {dressCode(data.dressCode)}
+            {getDressCode(dressCode)}
           </Box>
           <Box sx={styles.card}>
             <Typography variant="h5">Child Policy</Typography>
-            {childPolicy(data.childPolicy)}
+            {getChildPolicy(childPolicy)}
           </Box>
         </Stack>
       </Stack>

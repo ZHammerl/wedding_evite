@@ -97,7 +97,7 @@ export interface ContactsFormProps {
 }
 
 export interface ObjectArrayFormProps {
-  list: LocationObject[] | WishListObject[];
+  list: LocationObject | WishListObject;
   onInputChange: (
     e: (event: React.ChangeEvent<HTMLInputElement>) => void,
     index: number,
@@ -122,4 +122,10 @@ export interface DressCodeFormProps {
 export interface LoginProps {
   email: string;
   password: string;
+}
+
+export interface RegisterProps {
+  email: string;
+  password: string;
+  username: string;
 }
