@@ -9,9 +9,7 @@ import { EventObject } from "@interfaces/interfaces";
 import { eventService } from "@root/services/api/event.service";
 
 function Home() {
-  //api call to get data
   const { setCurrentDataResponse } = useAuth();
-  const [eViteInfo, setEViteInfo] = useState<EventObject | null>(null);
 
   const [eventId, setEventId] = useState<string>("6542ae77ca436fb3748cbb41");
 
@@ -21,6 +19,7 @@ function Home() {
         const result = await eventService.getEvent(id);
         const eventArray = result.event;
         setCurrentDataResponse(eventArray[0]);
+        // console.log(eventArray);
       } catch (error) {
         console.error("Error al obtener la info del evento", error);
       }

@@ -29,7 +29,6 @@ import { useAuth } from "@root/context/auth.context";
 function Details() {
   const { currentData } = useAuth();
   const { locations } = currentData;
-  // console.log(currentData.locations);
 
   return (
     <Box component="div" sx={styles.sectionContainer}>

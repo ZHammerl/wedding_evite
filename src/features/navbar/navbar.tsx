@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AppBar,
   Drawer,
@@ -16,21 +16,43 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { RsvpButton } from "@components/rsvpButton";
 import { Helpers } from "@helpers/helpers";
+import { useAuth } from "@root/context/auth.context";
 
 const navItems = ["Inicio", "Detalles", "Extras", "Contacto", "RSVP"];
+function Navbar() {
+  const { currentData } = useAuth();
+  const { nameOne, nameTwo } = currentData;
+  const [loading, setLoading] = useState(true);
+  const [currentDataResponse, setCurrentDataResponse] = useState(null);
 
-export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const handleClick = (item: string) => {};
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
-  const bridalCouple = { nameOne: "Blanca", nameTwo: "Pam" };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await currentData();
+        setCurrentDataResponse(data);
+      } catch (error) {
+        console.log("Error al obtener datos en navbar", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [currentData]);
+
+  if (loading) {
+    return <p>Cargando...</p>;
+  }
+  //! currentData tarda mucho en llegar
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 4 }}>
-        {Helpers.getInitials([bridalCouple.nameOne, bridalCouple.nameTwo])}
+        {Helpers.getInitials([nameOne, nameTwo])}
       </Typography>
       <Divider />
       <List>
@@ -64,7 +86,7 @@ export default function Navbar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "block", sm: "none" } }}
           >
-            {Helpers.getInitials([bridalCouple.nameOne, bridalCouple.nameTwo])}
+            {Helpers.getInitials([nameOne, nameTwo])}
           </Typography>
           <IconButton
             color="inherit"
@@ -84,7 +106,7 @@ export default function Navbar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            {bridalCouple.nameOne}&{bridalCouple.nameTwo}
+            {nameOne}&{nameTwo}
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) =>
@@ -128,3 +150,5 @@ export default function Navbar() {
     </Box>
   );
 }
+
+export default Navbar;

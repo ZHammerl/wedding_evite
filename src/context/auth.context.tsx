@@ -1,5 +1,11 @@
 import { EventObject } from "@interfaces/interfaces";
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 
 interface AuthContextProps {
   loginResult: any; // Puedes ajustar el tipo según la estructura de tu respuesta de inicio de sesión
@@ -23,12 +29,14 @@ export const AuthProvider: React.FC<{ children: React }> = ({ children }) => {
     date: "",
     contact: [],
     locations: [],
+    gifts: [],
     message: "",
     menus: {},
     wishList: [],
     dressCode: "",
     childPolicy: false,
   });
+
   const setCurrentDataResponse = (response: any) => {
     setCurrentData(response);
   };

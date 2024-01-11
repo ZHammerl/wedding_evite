@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Drawer,
@@ -24,12 +24,6 @@ import { useAuth } from "@root/context/auth.context";
 function Extras() {
   const { currentData } = useAuth();
   const { gifts, dressCode, childPolicy } = currentData;
-  console.log(gifts, dressCode, childPolicy);
-  const data = {
-    gifts: ["liverpool link", "amazon wishlist"],
-    dressCode: "playero", //casual, formal, playero
-    childPolicy: false,
-  };
 
   const getDressCode = (data: string) => {
     switch (data) {

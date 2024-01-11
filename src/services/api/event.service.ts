@@ -37,7 +37,7 @@ class EventService {
   async getEvent(userId: string) {
     try {
       const response = await axios.get(`${this.BASE_URL}/event/${userId}`);
-
+      // console.log(response, "service get event");
       return response.data;
     } catch (error) {
       console.log(userId);
