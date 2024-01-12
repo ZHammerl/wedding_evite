@@ -3,7 +3,7 @@ export interface Guests {
   eventId: string;
   guests: Guest[];
   extraGuestPermission: boolean;
-  isConfirmed: boolean;
+  status: boolean;
   message?: string;
 }
 
@@ -13,7 +13,7 @@ export interface Guest {
   firstName: string;
   surname: string;
   email?: string;
-  isConfirmed: boolean;
+  status: boolean;
   menuchoice: string;
-  additionalGuest?: boolean
+  additionalGuest?: boolean;
 }

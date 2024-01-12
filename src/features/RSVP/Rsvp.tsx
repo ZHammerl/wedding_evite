@@ -94,7 +94,7 @@ function Rsvp() {
             familyId: familyId,
             firstName: "",
             surname: "",
-            isConfirmed: false,
+            status: false,
             menuchoice: menuItems[0],
             additionalGuest: true,
           },
@@ -122,7 +122,7 @@ function Rsvp() {
       message: text,
     };
     guestsService
-      .updateGuestFamily(eventId, rsvpData)
+      .updateGuestFamily(eventId, familyId, rsvpData)
       .then(() => {
         setSent(true);
         setOpen(true);
@@ -174,7 +174,7 @@ function Rsvp() {
 
   const GuestInfo = guestData.guests.map((guest, i) => {
     console.log(11.5, { guestData, guest });
-    const { firstName, isConfirmed, menuchoice } = guest;
+    const { firstName, status, menuchoice } = guest;
 
     console.log(11.4, { sent });
 
@@ -205,7 +205,7 @@ function Rsvp() {
       //             <div>RSVP:</div>
       //           </Grid>
       //           <Grid>
-      //             <Chip variant="outlined" label={isConfirmed ? "si" : "no"} />
+      //             <Chip variant="outlined" label={status ? "si" : "no"} />
       //           </Grid>
       //         </Grid>
 
