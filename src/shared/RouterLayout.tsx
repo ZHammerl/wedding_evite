@@ -6,13 +6,13 @@ import Footer from "@footer/Footer";
 
 function RouterLayout() {
   return (
-    <>
+    <React.Fragment>
       <Navbar />
       <PageContainer disableGutters>
         <Outlet />
       </PageContainer>
       <Footer />
-    </>
+    </React.Fragment>
   );
 }
 

@@ -3,9 +3,31 @@ import Hero from "@hero/Hero";
 import Rsvp from "@root/features/RSVP/Rsvp";
 import Contact from "@root/features/contact/Contact";
 import Extras from "@root/features/extras/Extras";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useAuth } from "@root/context/auth.context";
+import { EventObject } from "@interfaces/interfaces";
+import { eventService } from "@root/services/api/event.service";
 
 function Home() {
+  const { setCurrentDataResponse } = useAuth();
+
+  const [eventId, setEventId] = useState<string>("6542ae77ca436fb3748cbb41");
+
+  useEffect(() => {
+    const getCurrentInfo = async (id: string) => {
+      try {
+        const result = await eventService.getEvent(id);
+        const eventArray = result.event;
+        setCurrentDataResponse(eventArray[0]);
+        // console.log(eventArray);
+      } catch (error) {
+        console.error("Error al obtener la info del evento", error);
+      }
+    };
+
+    getCurrentInfo(eventId);
+  }, [eventId]);
+
   return (
     <React.Fragment>
       <Hero />

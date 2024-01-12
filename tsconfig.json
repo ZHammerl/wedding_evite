@@ -26,7 +26,8 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@assets/*": ["src/assets/*"],
       "@adminContacts/*": ["src/features/admin/contacts/*"],
-      "@guestList/*": ["src/features/guestList/*"],
+      "@guestList/*": ["src/features/admin/guestList/*"],
+      "@admin/*": ["src/features/admin/*"],
       "@footer/*": ["src/features/footer/*"],
       "@rsvp/*": ["src/features/Rsvp/*"],
       //the last paths for root otherwise will ignore other paths

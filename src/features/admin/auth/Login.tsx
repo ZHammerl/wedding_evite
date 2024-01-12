@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -8,17 +8,20 @@ import {
   Grid,
   Paper,
 } from "@mui/material";
-import { LoginType } from "@root/types/types";
 import { useNotification } from "@root/context/notification.context";
 import { LoginValidate } from "@helpers/validateForm";
 import { useNavigate } from "react-router-dom";
+import { loginService } from "@root/services/api/login.service";
+import { LoginProps } from "@interfaces/interfaces";
+import { useAuth } from "@root/context/auth.context";
 
 const Login = () => {
-  const [loginData, setLoginData] = useState<LoginType>({
+  const [loginData, setLoginData] = useState<LoginProps>({
     email: "",
     password: "",
   });
   const navigate = useNavigate();
+  const { setLoginResponse } = useAuth();
 
   const { getError, getSuccess } = useNotification();
 
@@ -26,15 +29,23 @@ const Login = () => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
-  const submitHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const submitHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    LoginValidate.validate(loginData)
-      .then(() => {
+    // console.log(loginData);
+    try {
+      await LoginValidate.validate(loginData);
+      const loginResult = await loginService.login(loginData);
+      setLoginResponse(loginResult);
+
+      if (loginResult) {
+        navigate("/admin");
         getSuccess(JSON.stringify(loginData));
-      })
-      .catch((error) => {
-        getError(error.message);
-      });
+      } else {
+        getError("Error en el inicio de secion: " + loginResult);
+      }
+    } catch (error) {
+      getError(error.message);
+    }
   };
 
   return (

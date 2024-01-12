@@ -24,37 +24,12 @@ import { LocationObject } from "@interfaces/interfaces";
 import "./details.scss";
 import * as styles from "./details.styles";
 import MapsButton from "../../components/mapsButton";
+import { useAuth } from "@root/context/auth.context";
 
 function Details() {
-  const locations: LocationObject[] = [
-    {
-      id: "1",
-      title: "Ceremonia Religiosa",
-      image: LocationOne,
-      name: "Parroquia x",
-      date: "12 de enero ",
-      time: "14:00",
-      address: "rio escondido 1125, leon gto. 37480",
-    },
-    {
-      id: "2",
-      title: "Fiesta",
-      image: LocationTwo,
-      name: "Salon x",
-      date: "12 de enero",
-      time: "18:00",
-      address: "calle 15 Centro Barrio, Mexico",
-    },
-    {
-      id: "3",
-      title: "After Party",
-      image: LocationTwo,
-      name: "Salon Y",
-      date: "12 de enero",
-      time: "22:00",
-      address: "calle 15 Centro Barrio, Mexico",
-    },
-  ];
+  const { currentData } = useAuth();
+  const { locations } = currentData;
+
   return (
     <Box component="div" sx={styles.sectionContainer}>
       <Container disableGutters sx={styles.cardsContainer}>

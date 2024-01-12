@@ -11,3 +11,31 @@ export const RegisterValidate = yup.object().shape({
   confirmPassword: yup.string().trim().required("Password is required"),
   //!create a metod to compare passwords
 });
+
+export const EventValidate = yup.object().shape({
+  title: yup.string(),
+  nameOne: yup.string().required("Name is required"),
+  surnameOne: yup.string(),
+  nameTwo: yup.string().required("Name is required"),
+  surnameTwo: yup.string(),
+  date: yup.date().required("Date is required"),
+  contact: yup.array().of(
+    yup.object().shape({
+      title: yup.string(),
+      name: yup.string(),
+      phone: yup.string(),
+      inChargeOf: yup.string(),
+    })
+  ),
+  locations: yup.array().of(
+    yup.object().shape({
+      title: yup.string().required("Title location is required"),
+      name: yup.string().required("Name location is required"),
+      image: yup.string(),
+      date: yup.date().required("Date location is required"),
+      time: yup.string().required("Time location is required"),
+      address: yup.string().required("Address location is required"),
+    })
+  ),
+  message: yup.string().required("Say something to your guests"),
+});
