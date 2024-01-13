@@ -33,7 +33,7 @@ const Login = () => {
     e.preventDefault();
     // console.log(loginData);
     try {
-      await LoginValidate.validate(loginData);
+      LoginValidate.validate(loginData);
       const loginResult = await loginService.login(loginData);
       setLoginResponse(loginResult);
 

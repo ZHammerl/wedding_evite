@@ -11,31 +11,38 @@ import {
 import { RegisterType } from "@root/types/types";
 import { useNotification } from "@root/context/notification.context";
 import { LoginValidate } from "@helpers/validateForm";
+import { registerService } from "@root/services/api/register.service";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [registerData, setRegisterData] = useState<RegisterType>({
-    name: "",
+    username: "",
     lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-
+  const navigate = useNavigate();
   const { getError, getSuccess } = useNotification();
 
   const loginDataHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRegisterData({ ...registerData, [e.target.name]: e.target.value });
   };
 
-  const submitHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const submitHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    LoginValidate.validate(registerData)
-      .then(() => {
+
+    try {
+      LoginValidate.validate(registerData);
+      const registerResult = await registerService.signup(registerData);
+      console.log(registerResult);
+      if (registerResult) {
+        navigate("/login");
         getSuccess(JSON.stringify(registerData));
-      })
-      .catch((error) => {
-        getError(error.message);
-      });
+      }
+    } catch (error) {
+      getError(error.message);
+    }
   };
 
   return (

@@ -127,5 +127,7 @@ export interface LoginProps {
 export interface RegisterProps {
   email: string;
   password: string;
+  confirmPassword: string;
   username: string;
+  lastName: string;
 }
