@@ -10,10 +10,9 @@ import RouterLayout from "./shared/RouterLayout";
 export const AppRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<RouterLayout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<AdminPage />} />
-      </Route>
+      <Route path="/" element={<Home />} />
+      <Route path="/admin" element={<AdminPage />} />
+      <Route path="/" element={<RouterLayout />}></Route>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
     </Routes>

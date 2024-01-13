@@ -17,14 +17,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { RsvpButton } from "@components/rsvpButton";
 import { Helpers } from "@helpers/helpers";
 import { useAuth } from "@root/context/auth.context";
+import DrawerContent from "./drawerContent";
 
 const navItems = ["Inicio", "Detalles", "Extras", "Contacto", "RSVP"];
-function Navbar() {
+
+const Navbar: React.FC = () => {
   const { currentData } = useAuth();
   const { nameOne, nameTwo } = currentData;
   const [loading, setLoading] = useState(true);
-  const [currentDataResponse, setCurrentDataResponse] = useState(null);
-
   const [mobileOpen, setMobileOpen] = useState(false);
   const handleClick = (item: string) => {};
   const handleDrawerToggle = () => {
@@ -32,48 +32,17 @@ function Navbar() {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await currentData();
-        setCurrentDataResponse(data);
-      } catch (error) {
-        console.log("Error al obtener datos en navbar", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
+    // console.log(currentData);
+    if (currentData) {
+      setLoading(false);
+    }
   }, [currentData]);
 
-  if (loading) {
-    return <p>Cargando...</p>;
-  }
   //! currentData tarda mucho en llegar
-  const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 4 }}>
-        {Helpers.getInitials([nameOne, nameTwo])}
-      </Typography>
-      <Divider />
-      <List>
-        {navItems.map((item) =>
-          item === "RSVP" ? (
-            <RsvpButton key={item} onClick={() => handleClick(item)}>
-              {item}
-            </RsvpButton>
-          ) : (
-            <ListItem key={item} disablePadding>
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={item} />
-              </ListItemButton>
-            </ListItem>
-          )
-        )}
-      </List>
-    </Box>
-  );
 
-  return (
+  return loading ? (
+    <p>Cargando...</p>
+  ) : (
     <Box sx={{ display: "flex" }}>
       <AppBar
         component="nav"
@@ -86,7 +55,7 @@ function Navbar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "block", sm: "none" } }}
           >
-            {Helpers.getInitials([nameOne, nameTwo])}
+            {Helpers.getInitials(nameOne, nameTwo)}
           </Typography>
           <IconButton
             color="inherit"
@@ -144,11 +113,16 @@ function Navbar() {
             },
           }}
         >
-          {drawer}
+          <DrawerContent
+            data={currentData}
+            navItems={navItems}
+            handleDrawerToggle={handleDrawerToggle}
+            handleClick={handleClick}
+          />
         </Drawer>
       </Box>
     </Box>
   );
-}
+};
 
 export default Navbar;

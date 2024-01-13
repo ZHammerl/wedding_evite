@@ -5,8 +5,11 @@ export class Helpers {
   //instead of
   // const helper= new Helpers()
   //helper.firstLetterUppercase()
-  static getInitials(names: string[]): string {
-    return names.map((name) => name[0].toUpperCase()).join("&");
+  static getInitials(nameOne: string, nameTwo: string): string {
+    if (!nameOne) {
+      return;
+    }
+    return nameOne[0].toUpperCase() + "&" + nameTwo[0].toUpperCase();
   }
   static camelCase(item: string): string {
     const initial = item.slice(0, 1).toUpperCase();

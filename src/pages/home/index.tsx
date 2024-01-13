@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "@root/context/auth.context";
 import { EventObject } from "@interfaces/interfaces";
 import { eventService } from "@root/services/api/event.service";
+import Navbar from "@navbar/Navbar";
 
 function Home() {
   const { setCurrentDataResponse } = useAuth();
@@ -30,6 +31,7 @@ function Home() {
 
   return (
     <React.Fragment>
+      <Navbar />
       <Hero />
       <Details />
       <Extras />
