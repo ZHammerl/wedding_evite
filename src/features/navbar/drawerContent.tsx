@@ -15,7 +15,8 @@ import {
 } from "@mui/material";
 import { Helpers } from "@helpers/helpers";
 import { RsvpButton } from "@components/rsvpButton";
-const DrawerContent: React.FC = ({
+import { DrawerContentProps } from "@interfaces/props.interfaces";
+const DrawerContent: React.FC<DrawerContentProps> = ({
   data,
   handleDrawerToggle,
   handleClick,
